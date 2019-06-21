@@ -9,10 +9,12 @@ spring:
       prefix: classpath:/templates/
       suffix: .html
       cache: true
+    freemarker:
+      cache: true
     mvc:
       static-path-pattern: /**
     resources:
-      static-locations: classpath:/resources/, classpath:/static/, classpath:/public/
+      static-locations: classpath:/static/,  classpath:/public/, classpath:/
     redis:
       database: 0
       timeout: 0
