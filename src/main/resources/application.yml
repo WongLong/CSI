@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 server:
     port: 10086
     context-path: /csi
@@ -17,7 +16,7 @@ spring:
     redis:
       database: 0
       timeout: 0
-      host: 127.0.0.1
+      host: 172.18.20.49
       port: 6379
       password: 
       pool:
@@ -44,61 +43,8 @@ spring:
     activemq:
       user: lwl    # 连接用户名
       password: 123456   # 连接密码
-      broker-url: tcp://127.0.0.1:61616 # 消息组件的连接主机信息
+      broker-url: tcp://172.18.20.49:61616 # 消息组件的连接主机信息
 mybatis:
     mapperLocations: classpath:mapper/*.xml
     typeAliasesPackage: com.wrb.csi.model
-=======
-server:
-    port: 10086
-    context-path: /csi
-management:
-    security:
-      enabled: false
-spring:
-    thymeleaf:
-      prefix: classpath:/templates/
-      suffix: .html
-      cache: true
-    freemarker:
-      cache: true
-    mvc:
-      static-path-pattern: /**
-    resources:
-      static-locations: classpath:/static/,  classpath:/public/, classpath:/
-    redis:
-      database: 0
-      timeout: 0
-      host: 127.0.0.1
-      port: 6379
-      password: 
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
-    datasource:
-      type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
-      driver-class-name: org.gjt.mm.mysql.Driver      # 配置MySQL的驱动程序类
-      url: jdbc:mysql://172.18.20.49:3306/csi           # 数据库连接地址
-      username: root                                  # 数据库用户名
-      password: root                            # 数据库连接密码
-      filters: stat,wall,log4j
-      dbcp2:                                          # 进行数据库连接池的配置
-        min-idle: 5                                   # 数据库连接池的最小维持连接数    
-        initial-size: 5                               # 初始化提供的连接数
-        max-total: 5                                  # 最大的连接数
-        max-wait-millis: 200                          # 等待连接获取的最大超时时间
-      hikari:
-        connection-timeout: 60000
-    jms:
-      pub-sub-domain: false   # 配置消息的类型，如果是true则表示为topic消息，如果为false表示Queue消息
-    activemq:
-      user: lwl    # 连接用户名
-      password: 123456   # 连接密码
-      broker-url: tcp://127.0.0.1:61616 # 消息组件的连接主机信息
-mybatis:
-    mapperLocations: classpath:mapper/*.xml
-    typeAliasesPackage: com.wrb.csi.model
->>>>>>> a277a92ff090db519f331079dcaeb993d6bddf33
         
