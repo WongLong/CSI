@@ -132,6 +132,7 @@
 		</dependency>
 	</dependencies>
 	
+	<!-- MyBatis 逆向工程  -->
 	<build>
 		<plugins>
 			<plugin>
