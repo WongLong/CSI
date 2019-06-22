@@ -1,5 +1,7 @@
 package com.wrb.csi.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.wrb.csi.model.Dept;
@@ -53,4 +55,5 @@ public interface DeptDao {
      * @mbggenerated
      */
     int updateByPrimaryKey(Dept record);
+    List<Dept> selecteAllDepts();
 }

@@ -1,5 +1,7 @@
 package com.wrb.csi.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.wrb.csi.model.User;
@@ -53,4 +55,5 @@ public interface UserDao {
      * @mbggenerated
      */
     int updateByPrimaryKey(User record);
+    List<User> selectAllUsers();
 }

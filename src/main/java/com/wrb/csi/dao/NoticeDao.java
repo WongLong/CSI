@@ -1,5 +1,7 @@
 package com.wrb.csi.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.wrb.csi.model.Notice;
@@ -53,4 +55,5 @@ public interface NoticeDao {
      * @mbggenerated
      */
     int updateByPrimaryKey(Notice record);
+    List<Notice> selectAllNotices();
 }

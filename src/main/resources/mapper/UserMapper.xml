@@ -20,6 +20,9 @@
     -->
     id, loginname, password, status, createdate, username
   </sql>
+  <select id="selectAllUsers"  resultMap="BaseResultMap">  
+        SELECT * FROM user_inf   
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

@@ -19,6 +19,9 @@
     -->
     id, title, content, createdate, userid
   </sql>
+  <select id="selectAllNotices"  resultMap="BaseResultMap">  
+        SELECT * FROM notice_inf   
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

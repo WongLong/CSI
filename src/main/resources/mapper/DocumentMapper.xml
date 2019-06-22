@@ -20,6 +20,9 @@
     -->
     id, title, filename, remark, createdate, userid
   </sql>
+  <select id="selectAllDocuments"  resultMap="BaseResultMap">  
+        SELECT * FROM document_inf   
+  </select> 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
