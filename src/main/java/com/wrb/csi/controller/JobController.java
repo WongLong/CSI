@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class JobController {
-	@RequestMapping("/")
+	@RequestMapping("/c")
     public String  index(){
         return "";
     }
