@@ -1,16 +1,15 @@
 
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<base href="<%=basePath%>">
+<base href="%=basePath%"></base>
 
-<title>管理员登录</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
+<title>绠＄悊鍛樼櫥褰�</title>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
+<meta http-equiv="description" content="This is my page"/>
 
 
 
@@ -35,14 +34,14 @@ canvas {
 <script src="../js/metronic/plugins/face/js/Particleground.js"></script>
 <script>
 $(document).ready(function() {
-  //粒子背景特效
+  //绮掑瓙鑳屾櫙鐗规晥
   $('body').particleground({
     dotColor: '#5cbdaa',
     lineColor: '#5cbdaa'
   });
-  //验证码
+  //楠岃瘉鐮�
   createCode();
-  //测试提交，对接程序删除即可
+  //娴嬭瘯鎻愪氦锛屽鎺ョ▼搴忓垹闄ゅ嵆鍙�
   //$(".submit_btn").click(function(){
 	 // localhost.href="index.jsp";
 	  //});
@@ -104,22 +103,22 @@ h1 {
 
 		<dl class="admin_login">
 			<dt>
-				<strong>CSI员工之家</strong><em></em> <strong>请把你的脸放摄像头面前</strong>
+				<strong>CSI鍛樺伐涔嬪</strong><em></em> <strong>璇锋妸浣犵殑鑴告斁鎽勫儚澶撮潰鍓�</strong>
 			</dt>
 			<div id="media">
-				<video id="video" width="100%" height="300" autoplay></video>
+				<video id="video" width="100%" height="300" autoplay="autoplay"></video>
 				<canvas id="canvas" width="530" height="300"></canvas>
 			</div>
 			<dd>
-				<input type="button" onclick="query()" value="立即注册"
+				<input type="button" onclick="query()" value="绔嬪嵆娉ㄥ唽"
 					class="submit_btn" />
 			</dd>
 
 		</dl>
 		<script type="text/javascript" src="../js/alert.js"></script>
 		<script type="text/javascript">
-  		//var 是定义变量
-  		var video = document.getElementById("video"); //获取video标签
+  		//var 鏄畾涔夊彉閲�
+  		var video = document.getElementById("video"); //鑾峰彇video鏍囩
   		var context = canvas.getContext("2d");
   		var con  ={
   			audio:false,
@@ -131,7 +130,7 @@ h1 {
   			}
   		};	
   		
-  		//导航 获取用户媒体对象
+  		//瀵艰埅 鑾峰彇鐢ㄦ埛濯掍綋瀵硅薄
   			navigator.mediaDevices.getUserMedia(con)
   			.then(function(stream){
   				try{
@@ -151,7 +150,7 @@ h1 {
   	
   			function query(){
   				
-  				//把流媒体数据画到convas画布上去
+  				//鎶婃祦濯掍綋鏁版嵁鐢诲埌convas鐢诲竷涓婂幓
   				context.drawImage(video,0,0,530,300);
   				var base = getBase64();
   
@@ -163,7 +162,7 @@ h1 {
   					//dataType: "json",
   					//success:function(json){
   					
-  						$.MsgBox.Alert("消息","注册成功");
+  						$.MsgBox.Alert("娑堟伅","娉ㄥ唽鎴愬姛");
 						
 
 						
