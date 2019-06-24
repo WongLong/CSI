@@ -40,7 +40,6 @@ $(function(){
 	   	$.localStorage.remove(pk);
 	   	$.localStorage.remove(rk);
 	   }
-	 window.location.replace("main.html");
 	 /*
 		$.ajax({
 	     type: "POST",
@@ -66,8 +65,8 @@ $(function(){
 	 });
 	   */
 	   /** 提交表单 */
-	   //$("#loginForm").submit();
-		   
+	   $("#loginForm").submit();
+	   
    })
 	   
 })

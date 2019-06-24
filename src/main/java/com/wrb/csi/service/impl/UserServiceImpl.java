@@ -1,6 +1,5 @@
 package com.wrb.csi.service.impl;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,28 +11,29 @@ import com.wrb.csi.service.RedisService;
 import com.wrb.csi.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 	@Autowired
-	private RedisService redisService;	 
+	private RedisService redisService;
 
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		String key = "user_" + id;
-		if (redisService.hasKey(key)) {
-			redisService.delete(key);
-		}
+		redisService.delete(key);
+		redisService.delete("users");
 		return userDao.deleteByPrimaryKey(id);
 	}
 
 	@Override
 	public int insert(User record) {
+		redisService.delete("users");
 		return userDao.insert(record);
 	}
 
 	@Override
-	public int insertSelective(User record) {		
+	public int insertSelective(User record) {
+		redisService.delete("users");
 		return userDao.insertSelective(record);
 	}
 
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 			User user = (User) redisService.get(key);
 			return user;
 		}
-		
+
 		User user = userDao.selectByPrimaryKey(id);
 		redisService.set(key, user);
 		return user;
@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService{
 	public int updateByPrimaryKeySelective(User record) {
 		String key = "user_" + record.getId();
 		redisService.set(key, record);
+		redisService.delete("users");
 		return userDao.updateByPrimaryKeySelective(record);
 	}
 
@@ -61,6 +62,7 @@ public class UserServiceImpl implements UserService{
 	public int updateByPrimaryKey(User record) {
 		String key = "user_" + record.getId();
 		redisService.set(key, record);
+		redisService.delete("users");
 		return userDao.updateByPrimaryKey(record);
 	}
 
@@ -72,11 +74,15 @@ public class UserServiceImpl implements UserService{
 			List<User> users = (List<User>) redisService.get(key);
 			return users;
 		}
-		
+
 		List<User> users = userDao.selectAllUsers();
 		redisService.set(key, users);
 		return users;
 	}
-	  
+
+	@Override
+	public User selectByName(String loginname) {
+		return userDao.selectByName(loginname);
+	}
 
 }

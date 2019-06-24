@@ -20,19 +20,20 @@ public class DeptServiceImpl implements DeptService {
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		String key = "dept_" + id;
-		if (redisService.hasKey(key)) {
-			redisService.delete(key);
-		}
+		redisService.delete(key);
+		redisService.delete("depts");
 		return deptDao.deleteByPrimaryKey(id);
 	}
 
 	@Override
 	public int insert(Dept record) {
+		redisService.delete("depts");
 		return deptDao.insert(record);
 	}
 
 	@Override
 	public int insertSelective(Dept record) {
+		redisService.delete("depts");
 		return deptDao.insertSelective(record);
 	}
 
@@ -53,6 +54,7 @@ public class DeptServiceImpl implements DeptService {
 	public int updateByPrimaryKeySelective(Dept record) {
 		String key = "dept_" + record.getId();
 		redisService.set(key, record);
+		redisService.delete("depts");
 		return deptDao.updateByPrimaryKeySelective(record);
 	}
 
@@ -60,6 +62,7 @@ public class DeptServiceImpl implements DeptService {
 	public int updateByPrimaryKey(Dept record) {
 		String key = "dept_" + record.getId();
 		redisService.set(key, record);
+		redisService.delete("depts");
 		return deptDao.updateByPrimaryKey(record);
 	}
 

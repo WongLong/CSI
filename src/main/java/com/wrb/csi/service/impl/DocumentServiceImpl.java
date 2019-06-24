@@ -16,22 +16,27 @@ public class DocumentServiceImpl implements DocumentService {
 	private DocumentDao documentDao;
 	@Autowired
 	private RedisService redisService;
+
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		String key = "document_" + id;
-		if (redisService.hasKey(key)) {
-			redisService.delete(key);
-		}
+		redisService.delete(key);
+		redisService.delete("documents");
 		return documentDao.deleteByPrimaryKey(id);
 	}
+
 	@Override
 	public int insert(Document record) {
+		redisService.delete("documents");
 		return documentDao.insert(record);
 	}
+
 	@Override
 	public int insertSelective(Document record) {
+		redisService.delete("documents");
 		return documentDao.insert(record);
 	}
+
 	@Override
 	public Document selectByPrimaryKey(Integer id) {
 		String key = "document_" + id;
@@ -39,23 +44,28 @@ public class DocumentServiceImpl implements DocumentService {
 			Document document = (Document) redisService.get(key);
 			return document;
 		}
-		
+
 		Document document = documentDao.selectByPrimaryKey(id);
 		redisService.set(key, document);
 		return document;
 	}
+
 	@Override
 	public int updateByPrimaryKeySelective(Document record) {
 		String key = "document_" + record.getId();
 		redisService.set(key, record);
+		redisService.delete("documents");
 		return documentDao.updateByPrimaryKeySelective(record);
 	}
+
 	@Override
 	public int updateByPrimaryKey(Document record) {
 		String key = "document_" + record.getId();
 		redisService.set(key, record);
+		redisService.delete("documents");
 		return documentDao.updateByPrimaryKey(record);
 	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Document> selectAllDocuments() {
@@ -64,7 +74,7 @@ public class DocumentServiceImpl implements DocumentService {
 			List<Document> documents = (List<Document>) redisService.get(key);
 			return documents;
 		}
-		
+
 		List<Document> documents = documentDao.selectAllDocuments();
 		redisService.set(key, documents);
 		return documents;

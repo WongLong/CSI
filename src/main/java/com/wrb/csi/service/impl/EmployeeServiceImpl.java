@@ -16,22 +16,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeDao employeeDao;
 	@Autowired
 	private RedisService redisService;
+
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		String key = "employee_" + id;
-		if (redisService.hasKey(key)) {
-			redisService.delete(key);
-		}
+		redisService.delete(key);
+		redisService.delete("employees");
 		return employeeDao.deleteByPrimaryKey(id);
 	}
+
 	@Override
-	public int insert(Employee record) {		
+	public int insert(Employee record) {
+		redisService.delete("employees");
 		return employeeDao.insert(record);
 	}
+
 	@Override
-	public int insertSelective(Employee record) {		
+	public int insertSelective(Employee record) {
+		redisService.delete("employees");
 		return employeeDao.insertSelective(record);
 	}
+
 	@Override
 	public Employee selectByPrimaryKey(Integer id) {
 		String key = "employee_" + id;
@@ -43,18 +48,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 		redisService.set(key, employee);
 		return employee;
 	}
+
 	@Override
 	public int updateByPrimaryKeySelective(Employee record) {
 		String key = "employee_" + record.getId();
 		redisService.set(key, record);
+		redisService.delete("employees");
 		return employeeDao.updateByPrimaryKeySelective(record);
 	}
+
 	@Override
 	public int updateByPrimaryKey(Employee record) {
 		String key = "employee_" + record.getId();
 		redisService.set(key, record);
+		redisService.delete("employees");
 		return employeeDao.updateByPrimaryKey(record);
 	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> selectAllEmployees() {
