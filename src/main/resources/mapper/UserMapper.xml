@@ -20,7 +20,7 @@
     -->
     id, loginname, password, status, createdate, username
   </sql>
-  <select id="selectByName"  resultMap="BaseResultMap" parameterType="java.lang.String">  
+  <select id="selectByLoginName"  resultMap="BaseResultMap" parameterType="java.lang.String">  
         SELECT * FROM user_inf where loginname = #{loginname,jdbcType=VARCHAR}
   </select>
   <select id="selectAllUsers"  resultMap="BaseResultMap">  

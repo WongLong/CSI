@@ -82,13 +82,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User selectByName(String loginname) {
-		return userDao.selectByName(loginname);
+	public User selectByLoginName(String loginname) {
+		return userDao.selectByLoginName(loginname);
 	}
 
 	@Override
 	public User login(String loginname, String password) {
-		User user = selectByName(loginname);
+		User user = selectByLoginName(loginname);
 		if (user.getPassword().equals(MD5Util.string2MD5(password)))
 			return user;
 		return null;

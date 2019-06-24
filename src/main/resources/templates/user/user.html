@@ -75,21 +75,22 @@
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tr>
 			  <td class="fftd">
-			  	
+			  		<form action="searchUser" method="post" id="searchUser">
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 					    <td class="font3">
 					    	用户名：<input type="text" name="username"></input>
 					    	用户状态：<select name="status">
-					    			<option value="">全部</option>
+					    			<option value="0">全部</option>
 									<option value="1">管理员</option>
 									<option value="2">普通用户</option>
 									</select>
 					    	 <input type="submit" value="搜索"></input>
-					    	<input id="delete" type="button" value="删除"></input>
+					    	 <input id="delete" type="button" value="删除"></input>
 					    </td>
 					  </tr>
 					</table>
+					</form>
 			
 			  </td>
 			</tr>
@@ -113,34 +114,19 @@
 			   
 			</tr>
 			
-				<tr id="data_0" align="center" class="main_trbg" style="background-color: rgb(255, 255, 255);">
-					<td><input type="checkbox" id="box_0" value="1"></input></td>
-					 <td>songyq</td>
-					  <td>96e79218965eb72c92a549dd5a330112</td>
-					  <td>songyq</td>
-					  <td>2</td>
-					  <td>2016年3月12日</td>
-								
-					 <td align="center" width="40px;"><a href="showUpdateUser.html">
-							<img title="修改" src="../images/update.gif"></img></a>
-					  </td>
+				 <tr id="data_1" align="center" class="main_trbg" style="background-color: rgb(255, 255, 255);" th:each="user : ${session.users}">
+				 	<td><input type="checkbox" id="box_1" value="${user.id}"></input></td>
+           		 	<td th:text="${user.loginname}"></td>
+            		<td th:text="${user.password}"></td>
+            		<td th:text="${user.username}"></td>
+            		<td th:text="${user.status}"></td>
+            		<td th:text="${user.createdate}"></td>
+            		<td align="center" width="40px;"><a href="showUpdateUser.html">
+						<img title="修改" src="../images/update.gif"></img></a>
+					 </td>
 					  
-				</tr>
-			
-				<tr id="data_1" align="center" class="main_trbg" style="background-color: rgb(238, 204, 255);">
-					<td><input type="checkbox" id="box_1" value="5"></input></td>
-					 <td>wangxh</td>
-					  <td>96e79218965eb72c92a549dd5a330112</td>
-					  <td>wangxh</td>
-					  <td>1</td>
-					  <td>2019年4月6日</td>
-								
-					 <td align="center" width="40px;"><a href="showUpdateUser.html">
-							<img title="修改" src="../images/update.gif"></img></a>
-					  </td>
-					  
-				</tr>
-			
+        		</tr>
+				
 		  </tbody></table>
 		</td>
 	  </tr>

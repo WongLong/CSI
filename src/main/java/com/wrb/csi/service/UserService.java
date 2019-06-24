@@ -12,6 +12,6 @@ public interface UserService {
     int updateByPrimaryKeySelective(User record);
     int updateByPrimaryKey(User record);
     List<User> selectAllUsers();
-    User selectByName(String loginname);
     User login(String loginname, String password);
+    User selectByLoginName(String loginname);
 }
