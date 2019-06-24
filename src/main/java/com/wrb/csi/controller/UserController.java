@@ -1,6 +1,8 @@
 package com.wrb.csi.controller;
 
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,10 +21,29 @@ public class UserController {
 	
 	@RequestMapping(value="/login",method = {RequestMethod.POST, RequestMethod.GET})
     public String  login(HttpServletRequest request, HttpSession session){
-		String username = request.getParameter("loginname");
+		String loginname = request.getParameter("loginname");
 		String password = request.getParameter("password");
-//		User user = service.selectByName(username);
-//		System.out.println(user.getPassword());
-        return "main";
+		User u = service.login(loginname, password);
+		if(u != null) {
+			session.setAttribute("loginedUser",u);
+			session.setAttribute("users", service.selectAllUsers());
+			return "main";
+		}
+		
+		return "loginForm";
     }
+	
+	@RequestMapping(value="/insertUser",method = {RequestMethod.POST, RequestMethod.GET})
+	public String insertUser(HttpServletRequest request, HttpSession session) {
+		User loginedUser = (User) session.getAttribute("loginedUser");
+		if(loginedUser.getStatus() == 1) {
+			String loginname = request.getParameter("loginname");
+			String password = request.getParameter("password");
+			String username = request.getParameter("username");
+			Integer status = Integer.parseInt(request.getParameter("status"));
+			service.insert(new User(loginname, password, status, new Date(), username));
+		}
+		
+		return "main";
+	}
 }

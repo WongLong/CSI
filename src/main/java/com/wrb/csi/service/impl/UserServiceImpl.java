@@ -9,6 +9,7 @@ import com.wrb.csi.dao.UserDao;
 import com.wrb.csi.model.User;
 import com.wrb.csi.service.RedisService;
 import com.wrb.csi.service.UserService;
+import com.wrb.csi.util.MD5Util;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -83,6 +84,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User selectByName(String loginname) {
 		return userDao.selectByName(loginname);
+	}
+
+	@Override
+	public User login(String loginname, String password) {
+		User user = selectByName(loginname);
+		if (user.getPassword().equals(MD5Util.string2MD5(password)))
+			return user;
+		return null;
 	}
 
 }

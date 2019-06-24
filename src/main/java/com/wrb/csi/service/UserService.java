@@ -13,4 +13,5 @@ public interface UserService {
     int updateByPrimaryKey(User record);
     List<User> selectAllUsers();
     User selectByName(String loginname);
+    User login(String loginname, String password);
 }
