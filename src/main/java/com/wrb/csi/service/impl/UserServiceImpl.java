@@ -89,6 +89,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(String loginname, String password) {
 		User user = selectByLoginName(loginname);
+		if(user == null) return null;
 		if (user.getPassword().equals(MD5Util.string2MD5(password)))
 			return user;
 		return null;

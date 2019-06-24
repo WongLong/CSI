@@ -9,6 +9,10 @@ public class Employee implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Employee() {
+	
+	}
+
 	public Employee(Integer deptid, Integer jobid, String name, String cardid, String address, String postcode,
 			String tel, String phone, String qqnum, String email, Integer sex, String party, Date birthday, String race,
 			String education, String speciality, String hobby, String pemark, Date createdate) {

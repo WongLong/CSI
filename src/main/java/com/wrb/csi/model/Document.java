@@ -9,6 +9,10 @@ public class Document implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Document() {
+		
+	}
+
 	public Document(String title, String filename, String remark, Date createdate, Integer userid) {
 		super();
 		this.title = title;

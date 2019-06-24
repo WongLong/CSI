@@ -8,6 +8,10 @@ public class Job implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Job() {
+		
+	}
+
 	public Job(String name, String remark) {
 		super();
 		this.name = name;

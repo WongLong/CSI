@@ -8,6 +8,10 @@ public class Dept implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Dept() {
+	
+	}
+
 	public Dept(String name, String remark) {
 		super();
 		this.name = name;

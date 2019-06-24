@@ -9,6 +9,10 @@ public class Notice implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Notice() {
+		
+	}
+
 	public Notice(String title, String content, Date createdate, Integer userid) {
 		super();
 		this.title = title;
