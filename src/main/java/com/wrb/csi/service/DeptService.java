@@ -11,5 +11,5 @@ public interface DeptService {
 	Dept selectByPrimaryKey(Integer id);
 	int updateByPrimaryKeySelective(Dept record);
 	int updateByPrimaryKey(Dept record);
-	List<Dept> selecteAllDepts();
+	List<Dept> selectAllDepts();
 }

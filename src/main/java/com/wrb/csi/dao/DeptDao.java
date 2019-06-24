@@ -55,5 +55,5 @@ public interface DeptDao {
      * @mbggenerated
      */
     int updateByPrimaryKey(Dept record);
-    List<Dept> selecteAllDepts();
+    List<Dept> selectAllDepts();
 }

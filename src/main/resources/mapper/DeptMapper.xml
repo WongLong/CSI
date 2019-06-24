@@ -17,7 +17,7 @@
     -->
     id, name, remark
   </sql>
-  <select id="selectAllDepts"  resultMap="DepartmentMap">  
+  <select id="selectAllDepts"  resultMap="BaseResultMap">  
         SELECT * FROM dept_inf   
   </select> 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

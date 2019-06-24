@@ -65,14 +65,14 @@ public class DeptServiceImpl implements DeptService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Dept> selecteAllDepts() {
+	public List<Dept> selectAllDepts() {
 		String key = "depts";
 		if (redisService.hasKey(key)) {
 			List<Dept> depts = (List<Dept>) redisService.get(key);
 			return depts;
 		}
 
-		List<Dept> depts = deptDao.selecteAllDepts();
+		List<Dept> depts = deptDao.selectAllDepts();
 		redisService.set(key, depts);
 		return depts;
 	}
