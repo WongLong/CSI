@@ -15,12 +15,12 @@ spring:
       static-locations: classpath:/resources/, classpath:/static/, classpath:/public/
     redis:
       database: 0
-      timeout: 0
+      timeout: -1
       host: 172.18.20.49
       port: 6379
       password: 
       pool:
-        max-active: 8
+        max-active: 20
         max-wait: -1
         max-idle: 8
         min-idle: 0

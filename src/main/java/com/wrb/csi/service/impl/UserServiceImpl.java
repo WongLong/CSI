@@ -1,5 +1,6 @@
 package com.wrb.csi.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,35 @@ public class UserServiceImpl implements UserService {
 		if (user.getPassword().equals(MD5Util.string2MD5(password)))
 			return user;
 		return null;
+	}
+
+	@Override
+	public List<User> seacherUser(String username, String status) {
+		List<User> users = this.selectAllUsers();
+		List<User> result = new ArrayList<User>();
+		if (username != null && username.compareTo("") != 0) {
+			for (int i = 0; i < users.size(); i++) {
+				if (users.get(i).getUsername().compareTo(username) == 0) {
+					result.add(users.get(i));
+				}
+			}
+		}
+		else {
+			result.addAll(users);
+		}
+		users.clear();
+		if (status.compareTo("1")==0 || status.compareTo("2")==0) {
+			for (int i = 0; i < result.size(); i++) {
+				if (result.get(i).getStatus()==Integer.valueOf(status)) {
+					users.add(result.get(i));
+				}
+			}
+			
+		}
+		else {
+			users.addAll(result);
+		}
+		return users;
 	}
 
 }

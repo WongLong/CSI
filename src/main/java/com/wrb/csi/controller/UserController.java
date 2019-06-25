@@ -1,6 +1,5 @@
 package com.wrb.csi.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class UserController {
 		return "loginForm";
     }
 	
-	@RequestMapping(value="/insertUser",method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="/user/insertUser",method = {RequestMethod.POST, RequestMethod.GET})
 	public String insertUser(HttpServletRequest request, HttpSession session) {
 		User loginedUser = (User) session.getAttribute("loginedUser");
 		if(loginedUser.getStatus() == 1) {
@@ -43,40 +42,16 @@ public class UserController {
 			String username = request.getParameter("username");
 			Integer status = Integer.parseInt(request.getParameter("status"));
 			service.insert(new User(loginname, password, status, new Date(), username));
+			session.setAttribute("users", service.selectAllUsers());
 		}
-		
-		return "main";
+		return "user/user";
 	}
 
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/user/searchUser", method = {RequestMethod.POST, RequestMethod.GET})
 	public String seacherUser(HttpServletRequest request, HttpSession session) {
 		String username = request.getParameter("username");
 		String status = request.getParameter("status");
-		List<User> users = (List<User>) session.getAttribute("users");
-		List<User> result = new ArrayList<User>();
-		if (username != null && username.compareTo("") != 0) {
-			for (int i = 0; i < users.size(); i++) {
-				if (users.get(i).getUsername().compareTo(username) == 0) {
-					result.add(users.get(i));
-				}
-			}
-		}
-		else {
-			result.addAll(users);
-		}
-		users.clear();
-		if (status.compareTo("1")==0 || status.compareTo("2")==0) {
-			for (int i = 0; i < result.size(); i++) {
-				if (result.get(i).getStatus()==Integer.valueOf(status)) {
-					users.add(result.get(i));
-				}
-			}
-			
-		}
-		else {
-			users.addAll(result);
-		}
+		List<User> users = service.seacherUser(username, status);
 		session.setAttribute("users", users);
 		return "user/user";
 	}

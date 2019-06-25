@@ -14,4 +14,5 @@ public interface UserService {
     List<User> selectAllUsers();
     User login(String loginname, String password);
     User selectByLoginName(String loginname);
+    List<User> seacherUser(String username, String status);
 }
