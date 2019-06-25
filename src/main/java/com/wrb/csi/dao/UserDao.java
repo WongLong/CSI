@@ -57,7 +57,5 @@ public interface UserDao {
     int updateByPrimaryKey(User record);
     List<User> selectAllUsers();
     User selectByLoginName(String loginname);
-
-    
-    
+    List<User> selectUserOnPage(int index, int pageSize);
    }

@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
 		users.clear();
 		if (status.compareTo("1")==0 || status.compareTo("2")==0) {
 			for (int i = 0; i < result.size(); i++) {
-				if (result.get(i).getStatus()==Integer.valueOf(status)) {
+				if (result.get(i).getStatus()==Integer.parseInt(status)) {
 					users.add(result.get(i));
 				}
 			}
@@ -123,6 +123,12 @@ public class UserServiceImpl implements UserService {
 			users.addAll(result);
 		}
 		return users;
+	}
+
+	@Override
+	public List<User> selectUserOnPage(int currentPage, int pageSize) {
+		int index = (currentPage - 1) * pageSize;
+		return userDao.selectUserOnPage(index, pageSize);
 	}
 
 }

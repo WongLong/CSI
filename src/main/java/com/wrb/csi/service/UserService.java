@@ -15,4 +15,5 @@ public interface UserService {
     User login(String loginname, String password);
     User selectByLoginName(String loginname);
     List<User> seacherUser(String username, String status);
+    List<User> selectUserOnPage(int currentPage, int pageSize);
 }
