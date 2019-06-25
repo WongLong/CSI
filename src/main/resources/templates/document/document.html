@@ -19,6 +19,7 @@
 	<script src="../js/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
 	<script src="../js/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
 	<script type="text/javascript">
+	//<[CDATA[
 	    $(function(){
 	    	
 	    	var boxs = $("input[type='checkbox'][id^='box_']");
@@ -58,7 +59,7 @@
 	 	   $("#delete").click(function(){
 	 		   /** 获取到用户选中的复选框  */
 	 		   var checkedBoxs = boxs.filter(":checked");
-	 		   if(checkedBoxs.length &lt; 1){
+	 		   if(checkedBoxs.length < 1){
 	 			   $.ligerDialog.error("请选择一个需要删除的文档！");
 	 		   }else{
 	 			   /** 得到用户选中的所有的需要删除的ids */
@@ -91,7 +92,7 @@
 	    function down(id){
 	    	$("a[id='down_"+id+"']").trigger("click");
 	    }
-	    
+	    //]]>
 	</script>
 </head>
 <body>

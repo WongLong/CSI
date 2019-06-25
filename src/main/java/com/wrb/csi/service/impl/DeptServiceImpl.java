@@ -1,5 +1,6 @@
 package com.wrb.csi.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,4 +80,21 @@ public class DeptServiceImpl implements DeptService {
 		redisService.set(key, depts);
 		return depts;
 	}
+
+	@Override
+	public List<Dept> searchDept(String name) {
+		List<Dept> depts = this.selectAllDepts();
+		List<Dept> dept = new ArrayList<Dept>();
+		if (name == "" || name == null) {
+			return depts;
+		} else {
+			for (int i = 0; i < depts.size(); i++) {
+				if (depts.get(i).getName().equals(name)) {
+					dept.add(depts.get(i));
+				}
+			}
+			return dept;
+		}
+	}
+
 }

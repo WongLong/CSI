@@ -16,7 +16,7 @@ spring:
     redis:
       database: 0
       timeout: -1
-      host: 172.18.20.49
+      host: 127.0.0.1
       port: 6379
       password: 
       pool:
@@ -27,7 +27,7 @@ spring:
     datasource:
       type: com.alibaba.druid.pool.DruidDataSource    # 配置当前要使用的数据源的操作类型
       driver-class-name: org.gjt.mm.mysql.Driver      # 配置MySQL的驱动程序类
-      url: jdbc:mysql://111.231.247.78:8066/csi           # 数据库连接地址
+      url: jdbc:mysql://111.231.247.78:8066/csi          # 数据库连接地址
       username: root                                  # 数据库用户名
       password: root                            # 数据库连接密码
       filters: stat,wall,log4j
@@ -43,7 +43,7 @@ spring:
     activemq:
       user: lwl    # 连接用户名
       password: 123456   # 连接密码
-      broker-url: tcp://172.18.20.49:61616 # 消息组件的连接主机信息
+      broker-url: tcp://127.0.0.1:61616 # 消息组件的连接主机信息
 mybatis:
     mapperLocations: classpath:mapper/*.xml
     typeAliasesPackage: com.wrb.csi.model

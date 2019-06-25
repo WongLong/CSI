@@ -36,6 +36,15 @@
 		</profile>
 	</profiles>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.45</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<!-- springboot依赖 -->
 		<dependency>
@@ -48,7 +57,6 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-
 		<!-- mybatis依赖 -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
@@ -130,15 +138,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		
+
 		<!-- AOP依赖 -->
 		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-aop</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 	</dependencies>
-	
-	<!-- MyBatis 逆向工程  -->
+
+	<!-- MyBatis 逆向工程 -->
 	<build>
 		<plugins>
 			<plugin>
