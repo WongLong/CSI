@@ -5,16 +5,18 @@
 <base href="%=basePath%"></base>
 
 <title>绠＄悊鍛樼櫥褰�</title>
-<meta http-equiv="pragma" content="no-cache"/>
-<meta http-equiv="cache-control" content="no-cache"/>
-<meta http-equiv="expires" content="0"/>
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
-<meta http-equiv="description" content="This is my page"/>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
+<meta http-equiv="description" content="This is my page" />
 
 
 
-<link rel="stylesheet" type="text/css" href="../js/metronic/plugins/face/css/style.css" />
-<script type="text/javascript" src="../js/metronic/plugins/face/js/jquery-1.4.4.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../js/metronic/plugins/face/css/style.css" />
+<script type="text/javascript"
+	src="../js/metronic/plugins/face/js/jquery-1.4.4.min.js"></script>
 <style>
 body {
 	height: 100%;
@@ -33,19 +35,19 @@ canvas {
 <script src="../js/metronic/plugins/face/js/verificationNumbers.js"></script>
 <script src="../js/metronic/plugins/face/js/Particleground.js"></script>
 <script>
-$(document).ready(function() {
-  //绮掑瓙鑳屾櫙鐗规晥
-  $('body').particleground({
-    dotColor: '#5cbdaa',
-    lineColor: '#5cbdaa'
-  });
-  //楠岃瘉鐮�
-  createCode();
-  //娴嬭瘯鎻愪氦锛屽鎺ョ▼搴忓垹闄ゅ嵆鍙�
-  //$(".submit_btn").click(function(){
-	 // localhost.href="index.jsp";
-	  //});
-});
+	$(document).ready(function() {
+		//绮掑瓙鑳屾櫙鐗规晥
+		$('body').particleground({
+			dotColor : '#5cbdaa',
+			lineColor : '#5cbdaa'
+		});
+		//楠岃瘉鐮�
+		createCode();
+		//娴嬭瘯鎻愪氦锛屽鎺ョ▼搴忓垹闄ゅ嵆鍙�
+		//$(".submit_btn").click(function(){
+		// localhost.href="index.jsp";
+		//});
+	});
 </script>
 
 
@@ -101,84 +103,77 @@ h1 {
 <body>
 
 
-		<dl class="admin_login">
-			<dt>
-				<strong>CSI鍛樺伐涔嬪</strong><em></em> <strong>璇锋妸浣犵殑鑴告斁鎽勫儚澶撮潰鍓�</strong>
-			</dt>
-			<div id="media">
-				<video id="video" width="100%" height="300" autoplay="autoplay"></video>
-				<canvas id="canvas" width="530" height="300"></canvas>
-			</div>
-			<dd>
-				<input type="button" onclick="query()" value="绔嬪嵆娉ㄥ唽"
-					class="submit_btn" />
-			</dd>
+	<dl class="admin_login">
+		<dt>
+			<strong>CSI鍛樺伐涔嬪</strong><em></em> <strong>璇锋妸浣犵殑鑴告斁鎽勫儚澶撮潰鍓�</strong>
+		</dt>
+		<div id="media">
+			<video id="video" width="100%" height="300" autoplay="autoplay"></video>
+			<canvas id="canvas" width="530" height="300"></canvas>
+		</div>
+		<dd>
+			<input type="button" onclick="query()" value="绔嬪嵆娉ㄥ唽"
+				class="submit_btn" />
+		</dd>
 
-		</dl>
-		<script type="text/javascript" src="../js/alert.js"></script>
-		<script type="text/javascript">
-  		//var 鏄畾涔夊彉閲�
-  		var video = document.getElementById("video"); //鑾峰彇video鏍囩
-  		var context = canvas.getContext("2d");
-  		var con  ={
-  			audio:false,
-  			video:true,
-  			video:{
-  			width:1980,
-  			height:1024,
-  			
-  			}
-  		};	
-  		
-  		//瀵艰埅 鑾峰彇鐢ㄦ埛濯掍綋瀵硅薄
-  			navigator.mediaDevices.getUserMedia(con)
-  			.then(function(stream){
-  				try{
-  					video.src = window.URL.createObjectURL(stream);
-  				}catch(e){
-  					video.srcObject=stream;
-  				}
-  				
-  				video.onloadmetadate = function(e){
-  					video.play();
-  				
-  				}
-  			});
-  	
-  			
-  			
-  	
-  			function query(){
-  				
-  				//鎶婃祦濯掍綋鏁版嵁鐢诲埌convas鐢诲竷涓婂幓
-  				context.drawImage(video,0,0,530,300);
-  				var base = getBase64();
-  
-  				
-  				//$.ajax({
-  					//type:"post",
-  					//url:"/hrm/user/faceRegister",
-  					//data:{"base":base},
-  					//dataType: "json",
-  					//success:function(json){
-  					
-  						$.MsgBox.Alert("娑堟伅","娉ㄥ唽鎴愬姛");
-						
-
-						
-					//}
-				//});
+	</dl>
+	<script type="text/javascript" src="../js/alert.js"></script>
+	<script type="text/javascript">
+		//var 鏄畾涔夊彉閲�
+		var video = document.getElementById("video"); //鑾峰彇video鏍囩
+		var context = canvas.getContext("2d");
+		var con = {
+			audio : false,
+			video : true,
+			video : {
+				width : 1980,
+				height : 1024,
 
 			}
-			function getBase64() {
-				var imgSrc = document.getElementById("canvas").toDataURL(
-						"image/png");
-				
-				return imgSrc.split("base64,")[1];
+		};
 
-			};
-		</script>
+		//瀵艰埅 鑾峰彇鐢ㄦ埛濯掍綋瀵硅薄
+		navigator.mediaDevices.getUserMedia(con).then(function(stream) {
+			try {
+				video.src = window.URL.createObjectURL(stream);
+			} catch (e) {
+				video.srcObject = stream;
+			}
 
-	
+			video.onloadmetadate = function(e) {
+				video.play();
+
+			}
+		});
+
+		function query() {
+
+			//鎶婃祦濯掍綋鏁版嵁鐢诲埌convas鐢诲竷涓婂幓
+			context.drawImage(video, 0, 0, 530, 300);
+			var base = getBase64();
+
+			//$.ajax({
+			//type:"post",
+			//url:"/hrm/user/faceRegister",
+			//data:{"base":base},
+			//dataType: "json",
+			//success:function(json){
+
+			$.MsgBox.Alert("娑堟伅", "娉ㄥ唽鎴愬姛");
+
+			//}
+			//});
+
+		}
+		function getBase64() {
+			var imgSrc = document.getElementById("canvas").toDataURL(
+					"image/png");
+
+			return imgSrc.split("base64,")[1];
+
+		};
+	</script>
+
+
 </body>
 </html>

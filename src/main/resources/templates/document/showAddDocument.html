@@ -16,6 +16,8 @@
 <script type="text/javascript" src="../js/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="../js/jquery.form.js"></script>
 <script type="text/javascript">
+
+//<![CDATA[
 	$(document).ready(function() {
 
 		/** 表单提交的校验 */
@@ -23,7 +25,7 @@
 			var title = $("#title").val();
 			var file = $("#file").val();
 
-			if (/* $.trim(title).length &lt;= 2 */true) {
+			if ( $.trim(title).length <= 2 ) {
 				alert("请输入两个字符以上的标题");
 				return;
 			} else if (!file) {
@@ -35,6 +37,7 @@
 
 		})
 	});
+	//]]>
 </script>
 </head>
 <body>
@@ -92,7 +95,7 @@
 
 
 						<tr>
-							<td class="font3 fftd"><input type="button" id="btn"
+							<td class="font3 fftd"><input type="submit" id="btn"
 								value="上传"></input> <input type="reset" value="重置"></input></td>
 						</tr>
 						<tr>

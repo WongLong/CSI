@@ -12,4 +12,5 @@ public interface NoticeService {
     int updateByPrimaryKeySelective(Notice record);
     int updateByPrimaryKey(Notice record);
     List<Notice> selectAllNotices();
+    List<Notice> searchNotices(String title,String content);
 }

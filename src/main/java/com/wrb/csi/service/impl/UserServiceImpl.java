@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 			List<User> users = (List<User>) redisService.get(key);
 			return users;
 		}
-
+		
 		List<User> users = userDao.selectAllUsers();
 		redisService.set(key, users);
 		return users;

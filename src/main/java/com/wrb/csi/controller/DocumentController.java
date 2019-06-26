@@ -23,6 +23,12 @@ public class DocumentController {
 	@Autowired
 	private DocumentService documentService;
 	
+	@RequestMapping(value = "/document/getAllDocuments", method = { RequestMethod.POST, RequestMethod.GET })
+	public String getAllDocuments(HttpServletRequest request, HttpSession session) {
+		List<Document> documents=documentService.selectAllDocuments();
+		session.setAttribute("datas", documents);
+		return "document/document";
+	}
 	
 	@RequestMapping(value = "/document/searchDocument", method = { RequestMethod.POST, RequestMethod.GET })
 	public String searchDocument(HttpServletRequest request, HttpSession session) {
@@ -67,7 +73,7 @@ public class DocumentController {
 		return "document/document";
 	}
 	
-	@RequestMapping(value = "/document/adddDocument", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/document/addDocument", method = { RequestMethod.POST, RequestMethod.GET })
 	public String adddDocument(HttpServletRequest request, HttpSession session) {
 		String title = request.getParameter("title");
 		String remark = request.getParameter("remark");
@@ -75,6 +81,22 @@ public class DocumentController {
 		User user=(User)session.getAttribute("loginedUser");
 		Document document=new Document(title, filename, remark, new Date(), user.getId());
 		documentService.insert(document);
+		
+		List<Document> documents = documentService.selectAllDocuments();
+		session.setAttribute("datas", documents);
+		return "document/document";
+	}
+	
+	@RequestMapping(value = "/document/changeDocument", method = { RequestMethod.POST, RequestMethod.GET })
+	public String changeJob(HttpServletRequest request, HttpSession session) {
+		String id = request.getParameter("id");
+		String title = request.getParameter("title");
+		String remark = request.getParameter("remark");
+		String filename = request.getParameter("filename");
+		User user=(User)session.getAttribute("loginedUser");
+		Document document=new Document(title, filename, remark, new Date(), user.getId());
+		document.setId(Integer.valueOf(id));
+		documentService.updateByPrimaryKey(document);
 		
 		List<Document> documents = documentService.selectAllDocuments();
 		session.setAttribute("datas", documents);

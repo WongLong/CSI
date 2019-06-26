@@ -1,23 +1,24 @@
 
 <html><head>
 	<title>人事管理系统——修改员工</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<link href="../css/css.css" type="text/css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../js/ligerUI/skins/Aqua/css/ligerui-dialog.css">
-	<link href="../js/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
+	<meta http-equiv="description" content="This is my page" />
+	<link href="../css/css.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="../js/ligerUI/skins/Aqua/css/ligerui-dialog.css" />
+	<link href="../js/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
     <script type="text/javascript" src="../js/jquery-migrate-1.2.1.js"></script>
 	<script src="../js/ligerUI/js/core/base.js" type="text/javascript"></script>
 	<script src="../js/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script> 
 	<script src="../js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
 	<script src="../js/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
-	<link href="../css/pager.css" type="text/css" rel="stylesheet">
-	<script language="javascript" type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script><link href="../js/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<link href="../css/pager.css" type="text/css" rel="stylesheet" />
+	<script language="javascript" type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>
+	<link href="../js/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 	function submit(){
 		// 控制文档加载完成以后 选中性别 
@@ -110,10 +111,8 @@
 			if (msg != ""){
 				$.ligerDialog.error(msg);
 				return false;
-			}else{
-				return true;
 			}
-			//$("#employeeForm").submit();
+			$("#employeeForm").submit();
 		//});
     }
 		
@@ -141,53 +140,45 @@
     <td>
     	
 			<!-- 隐藏表单，flag表示添加标记 -->
-    	 	<input type="hidden" name="flag" value="2"></input>
-			<input type="hidden" name="id" value="1"></input>
+    	  <input type="hidden" name="flag" value="2"></input>
+		  
+		  <form action="employeeForm" method="post">
+		  <input type="hidden" name="id" th:value="${session.temp.id}"></input>
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tbody><tr><td class="font3 fftd">
 		    	<table>
 		    		<tbody><tr>
-		    			<td class="font3 fftd">姓名：<input type="text" name="name" id="name" size="20" value="爱丽丝"></input></td>
-		    			<td class="font3 fftd">身份证号码：<input type="text" name="cardId" id="cardId" size="20" value="210203289706320016"></input></td>
+		    			<td class="font3 fftd">姓名：<input type="text" name="name" id="name" size="20" th:value="${session.temp.name}"></input></td>
+		    			<td class="font3 fftd">身份证号码：<input type="text" name="cardId" id="cardId" size="20" th:value="${session.temp.cardid}"></input></td>
 		    		</tr>
 		    		<tr>
 		    			<td class="font3 fftd">性别：
 								<select id="sex" name="sex" style="width:143px;">
-									<option value="1">男</option>
-									<option value="2">女</option>
+									<option value="1" th:selected="${session.temp.sex ==1}">男</option>
+									<option value="2" th:selected="${session.temp.sex ==2}">女</option>
 					    		</select>
 					    </td>
 		    			<td class="font3 fftd">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位：
 		    			 	<select id="job_id" name="job_id" style="width:143px;">
-					    			
-					    				<option value="1">职员</option>
-					    			
-					    				<option value="2">Java开发工程师</option>
-					    			
-					    				<option value="3">Java中级开发工程师</option>
-					    			
-					    				<option value="4">Java高级开发工程师</option>
-					    			
-					    				<option value="5">系统管理员</option>
-					    			
-					    				<option value="6">架构师</option>
-					    			
-					    				<option value="7">主管</option>
-					    			
-					    				<option value="8">经理</option>
-					    			
-					    				<option value="9">总经理</option>
-					    			
+					    				<option value="1" th:selected="${session.temp.jobid ==1}">职员</option>
+					    				<option value="2" th:selected="${session.temp.jobid ==2}">Java开发工程师</option>
+					    				<option value="3" th:selected="${session.temp.jobid ==3}">Java中级开发工程师</option>
+					    				<option value="4" th:selected="${session.temp.jobid ==4}">Java高级开发工程师</option>
+					    				<option value="5" th:selected="${session.temp.jobid ==5}">系统管理员</option>
+					    				<option value="6" th:selected="${session.temp.jobid ==6}">架构师</option>
+					    				<option value="7" th:selected="${session.temp.jobid ==7}">主管</option>
+					    				<option value="8" th:selected="${session.temp.jobid ==8}">经理</option>
+					    				<option value="9" th:selected="${session.temp.jobid ==9}">总经理</option>
 					    		</select>
 					    </td>
 		    		</tr>
 		    		<tr>
-		    			<td class="font3 fftd">学历：<input name="education" id="education" size="20" value="本科"></input></td>
-		    			<td class="font3 fftd">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：<input name="email" id="email" size="20" value="251425887@qq.com"></input></td>
+		    			<td class="font3 fftd">学历：<input name="education" id="education" size="20" th:value="${session.temp.education}"></input></td>
+		    			<td class="font3 fftd">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：<input name="email" id="email" size="20" th:value="${session.temp.email}"></input></td>
 		    		</tr>
 		    		<tr>
-		    			<td class="font3 fftd">手机：<input name="phone" id="phone" size="20" value="13902001111"></input></td>
-		    			<td class="font3 fftd">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input name="tel" id="tel" size="20" value="020-77777777"></input></td>
+		    			<td class="font3 fftd">手机：<input name="phone" id="phone" size="20" th:value="${session.temp.tel}"></input></td>
+		    			<td class="font3 fftd">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input name="tel" id="tel" size="20" th:value="${session.temp.phone}"></input></td>
 		    		</tr>
 		    		
 		    	</tbody></table>
@@ -196,84 +187,47 @@
 			
 			<tr>
 				<td class="font3 fftd">
-					政治面貌：<input name="party" id="party" size="40" value="党员"></input>&nbsp;&nbsp;
-					QQ&nbsp;&nbsp;号码：<input name="qqNum" id="qqNum" size="20" value="36750066"></input>
+					政治面貌：<input name="party" id="party" size="40" th:value="${session.temp.party}"></input>&nbsp;&nbsp;
+					QQ&nbsp;&nbsp;号码：<input name="qqNum" id="qqNum" size="20" th:value="${session.temp.qqnum}"></input>
 				</td>
 			</tr>
 			<tr><td class="main_tdbor"></td></tr>
 			
 			<tr>
 				<td class="font3 fftd">
-					联系地址：<input name="address" id="address" size="40" value="广州天河"></input>&nbsp;&nbsp;
-					邮政编码：<input name="postCode" id="postCode" size="20" value="510000"></input>
+					联系地址：<input name="address" id="address" size="40" th:value="${session.temp.address}"></input>&nbsp;&nbsp;
+					邮政编码：<input name="postCode" id="postCode" size="20" th:value="${session.temp.postcode}"></input>
 				</td>
 			</tr>
 			<tr><td class="main_tdbor"></td></tr>
 			
 			<tr>
 				<td class="font3 fftd">
-					出生日期：<input cssclass="Wdate" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'});" name="birthday" id="birthday" size="40"></input>&nbsp;&nbsp;
-					民&nbsp;&nbsp;&nbsp;&nbsp;族：<input name="race" id="race" size="20" value="满"></input>
+					出生日期：<input cssclass="Wdate" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'});" name="birthday" id="birthday" size="40" th:value="${session.temp.birthday}"></input>&nbsp;&nbsp;
+					民&nbsp;&nbsp;&nbsp;&nbsp;族：<input name="race" id="race" size="20" th:value="${session.temp.race}"></input>
 				</td>
 			</tr>
 			<tr><td class="main_tdbor"></td></tr>
 			
 			<tr>
 				<td class="font3 fftd">
-					所学专业：<input name="speciality" id="speciality" size="40" value="美声"></input>&nbsp;&nbsp;
-					爱&nbsp;&nbsp;&nbsp;&nbsp;好：<input name="hobby" id="hobby" size="20" value="唱歌"></input>
+					所学专业：<input name="speciality" id="speciality" size="40" th:value="${session.temp.speciality}"></input>&nbsp;&nbsp;
+					爱&nbsp;&nbsp;&nbsp;&nbsp;好：<input name="hobby" id="hobby" size="20" th:value="${session.temp.hobby}"></input>
 				</td>
 			</tr>
 			<tr><td class="main_tdbor"></td></tr>
 			
 			<tr>
 				<td class="font3 fftd">
-					备&nbsp;&nbsp;&nbsp;&nbsp;注：<input name="remark" id="remark" size="40" value="四大天王"></input>
+					备&nbsp;&nbsp;&nbsp;&nbsp;注：<input name="remark" id="remark" size="40" th:value="${session.temp.pemark}"></input>
 					&nbsp;&nbsp;所属部门：
 					<select name="dept_id" style="width:100px;">
-						   
-						   		
-			    					
-			    						<option value="1" selected="selected">技术部</option>
-			    					
-			    					
-			    				
-			    			
-						   		
-			    					
-			    					
-			    						<option value="2">运营部</option>
-			    					
-			    				
-			    			
-						   		
-			    					
-			    					
-			    						<option value="3">财务部</option>
-			    					
-			    				
-			    			
-						   		
-			    					
-			    					
-			    						<option value="5">总公办</option>
-			    					
-			    				
-			    			
-						   		
-			    					
-			    					
-			    						<option value="6">市场部</option>
-			    					
-			    				
-			    			
-						   		
-			    					
-			    					
-			    						<option value="7">教学部</option>
-			    					
-			    				
-			    			
+			    			<option value="1" th:selected="${session.temp.deptid ==1}">技术部</option>
+			    			<option value="2" th:selected="${session.temp.deptid ==2}">运营部</option>
+			    			<option value="3" th:selected="${session.temp.deptid ==3}">财务部</option>
+			    			<option value="4" th:selected="${session.temp.deptid ==4}">总公办</option>
+			    			<option value="5" th:selected="${session.temp.deptid ==5}">市场部</option>
+			    			<option value="6" th:selected="${session.temp.deptid ==6}">教学部</option>
 					</select>
 				</td>
 			</tr>
@@ -281,6 +235,7 @@
 			
 			<tr><td align="left" class="fftd"><input type="button"  onclick="submit()" value="修改"></input>&nbsp;&nbsp;<input type="reset" value="取消 "></input></td></tr>
 		  </tbody></table>
+		  </form>
 	
 	</td>
   </tr>

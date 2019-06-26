@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wrb.csi.model.Employee;
 import com.wrb.csi.model.Job;
 import com.wrb.csi.service.JobService;
 
@@ -33,6 +34,14 @@ public class JobController {
 			}
 			session.setAttribute("datas", result);
 		}
+		return "job/job";
+	}
+	
+	
+	@RequestMapping(value = "/job/AllJob", method = { RequestMethod.POST, RequestMethod.GET })
+	public String AllEmployee(HttpServletRequest request, HttpSession session) {
+		List<Job> Job = jobService.selectAllJobs();
+		session.setAttribute("datas", Job);
 		return "job/job";
 	}
 

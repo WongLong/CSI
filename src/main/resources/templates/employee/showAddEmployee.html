@@ -20,8 +20,6 @@
 	<link href="../css/pager.css" type="text/css" rel="stylesheet" />
 	<script language="javascript" type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript">
-	
-	 
 	    function submit(){
 	    	/** 员工表单提交 */
 			//$("#employeeForm").submit(function(){
@@ -108,10 +106,8 @@
 				if (msg != ""){
 					$.ligerDialog.error(msg);
 					return false;
-				}else{
-					return true;
 				}
-				//$("#employeeForm").submit();
+				$("#employeeForm").submit();
 			//});
 	    }
 		
@@ -131,8 +127,8 @@
   <tbody><tr valign="top">
     <td>
     	 
-		 	<!-- 隐藏表单，flag表示添加标记 -->
-    	 	<input type="hidden" name="flag" value="2"></input>
+    	 <input type="hidden" name="flag" value="2"></input>
+    	 <form name="employeeForm" id="employeeForm" action="addEmployee" method="post">
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tbody><tr><td class="font3 fftd">
 		    	<table>
@@ -227,11 +223,11 @@
 			    			
 			    				<option value="3">财务部</option>
 			    			
-			    				<option value="5">总公办</option>
+			    				<option value="4">总公办</option>
 			    			
-			    				<option value="6">市场部</option>
+			    				<option value="5">市场部</option>
 			    			
-			    				<option value="7">教学部</option>
+			    				<option value="6">教学部</option>
 			    			
 					</select>
 				</td>
@@ -241,6 +237,7 @@
 			<tr><td align="left" class="fftd">
 			<input type="button" onclick="submit()" value="添加"></input>&nbsp;&nbsp;<input type="reset" value="取消 "></input></td></tr>
 		  </tbody></table>
+		  </form>
 		 
 	</td>
   </tr>
