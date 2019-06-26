@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wrb.csi.model.Dept;
 import com.wrb.csi.model.Employee;
 import com.wrb.csi.model.User;
 import com.wrb.csi.service.EmployeeService;
@@ -66,6 +67,13 @@ public class EmployeeController {
 		String dept_id = request.getParameter("dept_id");
 		List<Employee> employees=service.searchEmployees(job_id, name, cardId, sex, phone, dept_id);
 		session.setAttribute("datas", employees);
+		return "employee/employee";
+	}
+	
+	@RequestMapping(value = "/employee/searchEmployees", method = { RequestMethod.POST, RequestMethod.GET })
+	public String AllEmployee(HttpServletRequest request, HttpSession session) {
+		List<Employee> Employee = service.selectAllEmployees();
+		session.setAttribute("datas", Employee);
 		return "employee/employee";
 	}
 	

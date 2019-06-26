@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wrb.csi.model.Job;
 import com.wrb.csi.model.User;
 import com.wrb.csi.service.UserService;
 import com.wrb.csi.util.MD5Util;
@@ -74,6 +75,14 @@ public class UserController {
 		String status = request.getParameter("status");
 		List<User> users = service.seacherUser(username, status);
 		session.setAttribute("datas", users);
+		return "user/user";
+	}
+	
+	
+	@RequestMapping(value = "/user/AllUser", method = { RequestMethod.POST, RequestMethod.GET })
+	public String AllEmployee(HttpServletRequest request, HttpSession session) {
+		List<User> User = service.selectAllUsers();
+		session.setAttribute("datas", User);
 		return "user/user";
 	}
 

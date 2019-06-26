@@ -22,7 +22,7 @@ public class DeptController {
 	private DeptService Service;
 
 	@RequestMapping(value = "/dept/searchDept", method = { RequestMethod.POST, RequestMethod.GET })
-	public String seacherJob(HttpServletRequest request, HttpSession session) {
+	public String seacherDept(HttpServletRequest request, HttpSession session) {
 		String name = request.getParameter("searchDeptname");
 		List<Dept> Depts = Service.selectAllDepts();
 		List<Dept> result = new ArrayList<Dept>();
@@ -50,12 +50,18 @@ public class DeptController {
 	}
 
 	@RequestMapping(value = "/dept/delDept", method = { RequestMethod.POST, RequestMethod.GET })
-	public String delJob(HttpServletRequest request, HttpSession session) {
+	public String delDept(HttpServletRequest request, HttpSession session) {
 		String[] select = request.getParameterValues("check");
 		for (int i = 0; i < select.length; i++) {
-			System.out.println(select[i]);
 			Service.deleteByPrimaryKey(Integer.valueOf(select[i]));
 		}
+		List<Dept> Depts = Service.selectAllDepts();
+		session.setAttribute("datas", Depts);
+		return "dept/dept";
+	}
+	
+	@RequestMapping(value = "/dept/AllDept", method = { RequestMethod.POST, RequestMethod.GET })
+	public String AllDept(HttpServletRequest request, HttpSession session) {
 		List<Dept> Depts = Service.selectAllDepts();
 		session.setAttribute("datas", Depts);
 		return "dept/dept";
@@ -77,7 +83,7 @@ public class DeptController {
 	}	
 	
 	@RequestMapping(value = "/dept/changeDept", method = { RequestMethod.POST, RequestMethod.GET })
-	public String changeJob(HttpServletRequest request, HttpSession session) {
+	public String changeDept(HttpServletRequest request, HttpSession session) {
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String remark = request.getParameter("remark");
