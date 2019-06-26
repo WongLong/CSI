@@ -628,29 +628,6 @@ function GetQueryString(name)
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
 }
-
-function loginOut(){
-	window.location.replace("loginForm.html");
-	/*
-	$.ajax({
-        type: "POST",
-        url: "/hrm/user/loginOut",
-        async: true,
-        data:{
-
-       	 },
-        dataType: "json",
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-           alert("出错了，请于管理员联系");
-        },
-        success: function (json) {
-   
-        	window.location.replace("/hrm/");
-
-        }
-    });
-*/
-}
 $(function(){
 	var $body = $('body');
     new StateToggler().restoreState( $body );
