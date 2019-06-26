@@ -58,4 +58,11 @@ public interface UserDao {
     List<User> selectAllUsers();
     User selectByLoginName(String loginname);
     List<User> selectUserOnPage(int index, int pageSize);
+    List<User> selectUserOnPageByStatus(int status, int index, int pageSize);
+	List<User> selectUserOnPageByUsername(String username, int index, int pageSize);
+	List<User> selectUserOnPageByUsernameAndStatus(String username, int status, int index, int pageSize);
+	Integer getUserCount();
+	Integer getUserCountByUsername(String username);
+	Integer getUserCountByStatus(int status);
+	Integer getUserCountByUsernameAndStatus(String username, int status);
    }

@@ -1,6 +1,5 @@
 package com.wrb.csi.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.wrb.csi.dao.DeptDao;
 import com.wrb.csi.model.Dept;
-import com.wrb.csi.model.Job;
 import com.wrb.csi.service.DeptService;
 import com.wrb.csi.service.RedisService;
 

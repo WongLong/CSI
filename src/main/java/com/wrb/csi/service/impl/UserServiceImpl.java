@@ -1,6 +1,5 @@
 package com.wrb.csi.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.wrb.csi.dao.UserDao;
 import com.wrb.csi.model.User;
+import com.wrb.csi.model.User.SearchUserMessage;
 import com.wrb.csi.service.RedisService;
 import com.wrb.csi.service.UserService;
 import com.wrb.csi.util.MD5Util;
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 			List<User> users = (List<User>) redisService.get(key);
 			return users;
 		}
-		
+
 		List<User> users = userDao.selectAllUsers();
 		redisService.set(key, users);
 		return users;
@@ -90,37 +90,29 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(String loginname, String password) {
 		User user = selectByLoginName(loginname);
-		if(user == null) return null;
+		if (user == null)
+			return null;
 		if (user.getPassword().equals(MD5Util.string2MD5(password)))
 			return user;
 		return null;
 	}
 
 	@Override
-	public List<User> seacherUser(String username, String status) {
-		List<User> users = this.selectAllUsers();
-		List<User> result = new ArrayList<User>();
-		if (username != null && username.compareTo("") != 0) {
-			for (int i = 0; i < users.size(); i++) {
-				if (users.get(i).getUsername().compareTo(username) == 0) {
-					result.add(users.get(i));
-				}
-			}
-		}
-		else {
-			result.addAll(users);
-		}
-		users.clear();
-		if (status.compareTo("1")==0 || status.compareTo("2")==0) {
-			for (int i = 0; i < result.size(); i++) {
-				if (result.get(i).getStatus()==Integer.parseInt(status)) {
-					users.add(result.get(i));
-				}
-			}
-			
-		}
-		else {
-			users.addAll(result);
+	public List<User> seacherUser(SearchUserMessage message, int currentPage, int pageSize) {		
+		List<User> users;
+		String username = message.getUsername();
+		int status = message.getStatus();
+		if (username.equals("") && status == 0) {
+			users = this.selectUserOnPage(currentPage, pageSize);
+		} else if (username.equals("") && status != 0) {
+			int index = (currentPage - 1) * pageSize;
+			users = userDao.selectUserOnPageByStatus(status, index, pageSize);
+		} else if (!username.equals("") && status == 0) {
+			int index = (currentPage - 1) * pageSize;
+			users = userDao.selectUserOnPageByUsername(username, index, pageSize);
+		} else{
+			int index = (currentPage - 1) * pageSize;
+			users = userDao.selectUserOnPageByUsernameAndStatus(username, status, index, pageSize);
 		}
 		return users;
 	}
@@ -129,6 +121,25 @@ public class UserServiceImpl implements UserService {
 	public List<User> selectUserOnPage(int currentPage, int pageSize) {
 		int index = (currentPage - 1) * pageSize;
 		return userDao.selectUserOnPage(index, pageSize);
+	}
+
+	@Override
+	public Integer getUserCount(SearchUserMessage message) {
+		String username = "";
+		int status = 0;
+		if(message != null) {
+			username = message.getUsername();
+			status = message.getStatus();
+		}
+		if (!username.equals("") && status == 0) {
+			return userDao.getUserCountByUsername(username);
+		} else if (username.equals("") && status != 0) {
+			return userDao.getUserCountByStatus(status);
+		} else if (!username.equals("") && status != 0) {
+			return userDao.getUserCountByUsernameAndStatus(username, status);
+		} else {
+			return userDao.getUserCount();
+		}
 	}
 
 }

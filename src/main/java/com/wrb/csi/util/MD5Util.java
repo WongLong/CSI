@@ -29,6 +29,5 @@ public class MD5Util {
             hexValue.append(Integer.toHexString(val));
         }
         return hexValue.toString();
- 
     }
 }

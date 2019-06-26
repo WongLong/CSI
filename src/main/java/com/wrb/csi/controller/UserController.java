@@ -1,17 +1,18 @@
 package com.wrb.csi.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wrb.csi.model.User;
+import com.wrb.csi.model.User.SearchUserMessage;
 import com.wrb.csi.service.UserService;
 import com.wrb.csi.util.MD5Util;
 
@@ -22,21 +23,20 @@ public class UserController {
 	private final int pageSize = 10;
 
 	@RequestMapping(value = "/login", method = { RequestMethod.POST, RequestMethod.GET })
-	public String login(HttpServletRequest request, HttpSession session) {
+	public String login(HttpServletRequest request, HttpSession session, Model model) {
 		String loginname = request.getParameter("loginname");
 		String password = request.getParameter("password");
 		User u = service.login(loginname, password);
 		if (u != null) {
 			session.setAttribute("loginedUser", u);
-			List<User> users = service.selectAllUsers();
-			int totalPage = users.size() / pageSize +  users.size() % pageSize > 0 ? 1 : 0 ;
+			int userSize = service.getUserCount(null);
 			int currentPage = 1;
+			int totalPage = userSize / pageSize + (userSize % pageSize > 0 ? 1 : 0);
 			session.setAttribute("totalPage", totalPage);
 			session.setAttribute("currentPage", currentPage);
 			session.setAttribute("datas", service.selectUserOnPage(currentPage, pageSize));
 			return "main";
 		}
-
 		return "loginForm";
 	}
 
@@ -51,7 +51,6 @@ public class UserController {
 				String username = request.getParameter("username");
 				Integer status = Integer.parseInt(request.getParameter("status"));
 				service.insert(new User(loginname, password, status, new Date(), username));
-				session.setAttribute("datas", service.selectAllUsers());
 			} else {
 				User temp = (User) session.getAttribute("temp");
 				String loginname = request.getParameter("loginname");
@@ -62,18 +61,55 @@ public class UserController {
 				temp.setStatus(status);
 				service.updateByPrimaryKey(temp);
 				session.removeAttribute("temp");
-				session.setAttribute("datas", service.selectAllUsers());
 			}
+			int userSize = service.getUserCount(null);
+			int totalPage = userSize / pageSize + (userSize % pageSize > 0 ? 1 : 0);
+			session.setAttribute("totalPage", totalPage);
+			session.setAttribute("currentPage", 1);
+			session.removeAttribute("message");
+			session.setAttribute("datas", service.selectUserOnPage(1, pageSize));
 		}
 		return "user/user";
 	}
 
 	@RequestMapping(value = "/user/searchUser", method = { RequestMethod.POST, RequestMethod.GET })
 	public String seacherUser(HttpServletRequest request, HttpSession session) {
-		String username = request.getParameter("username");
-		String status = request.getParameter("status");
-		List<User> users = service.seacherUser(username, status);
-		session.setAttribute("datas", users);
+		Integer type = Integer.parseInt(request.getParameter("type"));
+		SearchUserMessage message = session.getAttribute("message") == null ? new SearchUserMessage()
+				: (SearchUserMessage) session.getAttribute("message");
+		int currentPage = (int) session.getAttribute("currentPage");
+		if (type == 1) {
+			currentPage = currentPage - 1 < 1 ? 1 : currentPage - 1;
+		} else if (type == 2) {
+			int totalPage = (int) session.getAttribute("totalPage");
+			currentPage = currentPage + 1 > totalPage ? totalPage : currentPage + 1;
+		} else {
+			String username = request.getParameter("username");
+			Integer status = Integer.parseInt(request.getParameter("status"));
+			message.setUsername(username);
+			message.setStatus(status);
+			currentPage = 1;
+			Integer userSize = service.getUserCount(message);
+			session.setAttribute("totalPage", userSize / pageSize + (userSize % pageSize > 0 ? 1 : 0));
+			session.setAttribute("message", message);
+		}
+
+		session.setAttribute("currentPage", currentPage);
+		session.setAttribute("datas", service.seacherUser(message, currentPage, pageSize));
+		return "user/user";
+	}
+
+	@RequestMapping(value = "/user/jumpPage", method = { RequestMethod.POST, RequestMethod.GET })
+	public String jumpPage(HttpServletRequest request, HttpSession session) {
+		int totalPage = (int) session.getAttribute("totalPage");
+		Integer page = Integer.parseInt(request.getParameter("page"));
+		page = page < 1 ? 1 : page;
+		page = page > totalPage ? totalPage : page;
+
+		SearchUserMessage message = session.getAttribute("message") == null ? new SearchUserMessage()
+				: (SearchUserMessage) session.getAttribute("message");
+		session.setAttribute("currentPage", page);
+		session.setAttribute("datas", service.seacherUser(message, page, pageSize));
 		return "user/user";
 	}
 
@@ -112,7 +148,12 @@ public class UserController {
 				service.deleteByPrimaryKey(Integer.parseInt(id));
 			}
 		}
-		session.setAttribute("datas", service.selectAllUsers());
+		int userSize = service.getUserCount(null);
+		int totalPage = userSize / pageSize + (userSize % pageSize > 0 ? 1 : 0);
+		session.setAttribute("totalPage", totalPage);
+		session.setAttribute("currentPage", 1);
+		session.removeAttribute("message");
+		session.setAttribute("datas", service.selectUserOnPage(1, pageSize));
 		return "user/user";
 	}
 
