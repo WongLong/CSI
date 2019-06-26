@@ -144,25 +144,8 @@
 					    		</select></td>
 		    			<td class="font3 fftd">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位：
 		    			 <select name="job_id" style="width:143px;">
-					    			
-					    				<option value="1">职员</option>
-					    			
-					    				<option value="2">Java开发工程师</option>
-					    			
-					    				<option value="3">Java中级开发工程师</option>
-					    			
-					    				<option value="4">Java高级开发工程师</option>
-					    			
-					    				<option value="5">系统管理员</option>
-					    			
-					    				<option value="6">架构师</option>
-					    			
-					    				<option value="7">主管</option>
-					    			
-					    				<option value="8">经理</option>
-					    			
-					    				<option value="9">总经理</option>
-					    			
+					    			<option value="0">--请选择职业--</option>
+					    			<option  th:each="job : ${session.jobs}" th:value="${job.id}"><p th:text="${job.name}"></p></option>	
 					    		</select>
 					    </td>
 		    		</tr>
@@ -216,19 +199,8 @@
 					备&nbsp;&nbsp;&nbsp;&nbsp;注：<input name="remark" id="remark" size="40"></input>
 					&nbsp;&nbsp;所属部门：
 					<select name="dept_id" style="width:100px;">
-						   
-			    				<option value="1">技术部</option>
-			    			
-			    				<option value="2">运营部</option>
-			    			
-			    				<option value="3">财务部</option>
-			    			
-			    				<option value="4">总公办</option>
-			    			
-			    				<option value="5">市场部</option>
-			    			
-			    				<option value="6">教学部</option>
-			    			
+			    			<option value="0">--请选择部门--</option>
+							<option th:each="dept : ${session.depts}" th:value="${dept.id}"><p th:text="${dept.name}"></p></option>
 					</select>
 				</td>
 			</tr>

@@ -16,13 +16,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.wrb.csi.model.Dept;
 import com.wrb.csi.model.Employee;
 import com.wrb.csi.model.User;
+import com.wrb.csi.service.DeptService;
 import com.wrb.csi.service.EmployeeService;
+import com.wrb.csi.service.JobService;
 import com.wrb.csi.service.UserService;
 
 @Controller
 public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
+	@Autowired
+	private JobService jobservice;
+	@Autowired
+	private DeptService deptservice;
 
 	@RequestMapping(value="/employee/addEmployee",method = {RequestMethod.POST, RequestMethod.GET})
     public String  addEmployee(HttpServletRequest request, HttpSession session){
@@ -66,6 +72,7 @@ public class EmployeeController {
 		String phone = request.getParameter("phone");
 		String dept_id = request.getParameter("dept_id");
 		List<Employee> employees=service.searchEmployees(job_id, name, cardId, sex, phone, dept_id);
+	
 		session.setAttribute("datas", employees);
 		return "employee/employee";
 	}
@@ -74,6 +81,8 @@ public class EmployeeController {
 	public String AllEmployee(HttpServletRequest request, HttpSession session) {
 		List<Employee> Employee = service.selectAllEmployees();
 		session.setAttribute("datas", Employee);
+		session.setAttribute("jobs", jobservice.selectAllJobs());
+		session.setAttribute("depts", deptservice.selectAllDepts());
 		return "employee/employee";
 	}
 	

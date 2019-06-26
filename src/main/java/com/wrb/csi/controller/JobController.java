@@ -58,7 +58,7 @@ public class JobController {
 
 	@RequestMapping(value = "/job/delJob", method = { RequestMethod.POST, RequestMethod.GET })
 	public String delJob(HttpServletRequest request, HttpSession session) {
-		String[] select = request.getParameterValues("check");
+		String[] select = request.getParameterValues("checkbox");
 		for (int i = 0; i < select.length; i++) {
 			if (select[i].compareTo("on") != 0)
 				jobService.deleteByPrimaryKey(Integer.valueOf(select[i]));
