@@ -160,15 +160,7 @@
 					    </td>
 		    			<td class="font3 fftd">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位：
 		    			 	<select id="job_id" name="job_id" style="width:143px;">
-					    				<option value="1" th:selected="${session.temp.jobid ==1}">职员</option>
-					    				<option value="2" th:selected="${session.temp.jobid ==2}">Java开发工程师</option>
-					    				<option value="3" th:selected="${session.temp.jobid ==3}">Java中级开发工程师</option>
-					    				<option value="4" th:selected="${session.temp.jobid ==4}">Java高级开发工程师</option>
-					    				<option value="5" th:selected="${session.temp.jobid ==5}">系统管理员</option>
-					    				<option value="6" th:selected="${session.temp.jobid ==6}">架构师</option>
-					    				<option value="7" th:selected="${session.temp.jobid ==7}">主管</option>
-					    				<option value="8" th:selected="${session.temp.jobid ==8}">经理</option>
-					    				<option value="9" th:selected="${session.temp.jobid ==9}">总经理</option>
+					    				<option  th:each="job : ${session.jobs}" th:value="${job.id}" th:selected="${session.temp.jobid ==job.id}"><p th:text="${job.name}"></p></option>	
 					    		</select>
 					    </td>
 		    		</tr>
@@ -203,7 +195,7 @@
 			
 			<tr>
 				<td class="font3 fftd">
-					出生日期：<input cssclass="Wdate" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'});" name="birthday" id="birthday" size="40" th:value="${session.temp.birthday}"></input>&nbsp;&nbsp;
+					出生日期：<input cssclass="Wdate" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'});" name="birthday" id="birthday" size="40" th:value="${session.temp.birthday.toLocaleString()}"></input>&nbsp;&nbsp;
 					民&nbsp;&nbsp;&nbsp;&nbsp;族：<input name="race" id="race" size="20" th:value="${session.temp.race}"></input>
 				</td>
 			</tr>
@@ -222,12 +214,7 @@
 					备&nbsp;&nbsp;&nbsp;&nbsp;注：<input name="remark" id="remark" size="40" th:value="${session.temp.pemark}"></input>
 					&nbsp;&nbsp;所属部门：
 					<select name="dept_id" style="width:100px;">
-			    			<option value="1" th:selected="${session.temp.deptid ==1}">技术部</option>
-			    			<option value="2" th:selected="${session.temp.deptid ==2}">运营部</option>
-			    			<option value="3" th:selected="${session.temp.deptid ==3}">财务部</option>
-			    			<option value="4" th:selected="${session.temp.deptid ==4}">总公办</option>
-			    			<option value="5" th:selected="${session.temp.deptid ==5}">市场部</option>
-			    			<option value="6" th:selected="${session.temp.deptid ==6}">教学部</option>
+							<option th:each="dept : ${session.depts}" th:value="${dept.id}" th:selected="${session.temp.deptid ==dept.id}"><p th:text="${dept.name}"></p></option>
 					</select>
 				</td>
 			</tr>

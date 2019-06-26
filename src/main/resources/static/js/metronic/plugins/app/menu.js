@@ -11,23 +11,25 @@ function loadMenu(){
 
 
 	var json='[{"id": "1","name": "CSI员工之家","icon": null,"url": "","parentId": "",'
-	+'"childs": [{"id": "11","name": "用户管理","icon": "/xingxing.png","url": "user/user.html","parentId": "1",'
-	+'"childs": [{"id": "111","name": "用户查询","icon": "","url": "user/user.html","parentId": "11",'
+	+'"childs": [{"id": "11","name": "用户管理","icon": "xingxing.png","url": "user/AllUser","parentId": "1",'
+	+'"childs": [{"id": "111","name": "用户查询","icon": "","url": "user/AllUser","parentId": "11",'
 	+'"childs": []},{"id": "112","name": "添加用户","icon": "","url": "user/showAddUser.html","parentId": "11",'
-	+'"childs": []}]},{"id": "12","name": "部门管理","icon": "/xingxing.png","url": "dept/dept.html","parentId": "1",'
-	+'"childs": [{"id": "121","name": "部门查询","icon": "","url": "dept/dept.html","parentId": "12",'
+	+'"childs": []}]},{"id": "12","name": "部门管理","icon": "xingxing.png","url": "dept/AllDept","parentId": "1",'
+	+'"childs": [{"id": "121","name": "部门查询","icon": "","url": "dept/AllDept","parentId": "12",'
 	+'"childs": []},{"id": "122","name": "添加部门","icon": "","url": "dept/showAddDept.html","parentId": "12",'
-	+'"childs": []}]},{"id": "14","name": "职位管理","icon": "/xingxing.png","url": "job/job.html","parentId": "1",'
-	+'"childs": [{"id": "141","name": "职位查询","icon": "","url": "job/job.html","parentId": "14",'
+
+	+'"childs": []}]},{"id": "14","name": "职位管理","icon": "xingxing.png","url": "job/AllJob","parentId": "1",'
+	+'"childs": [{"id": "141","name": "职位查询","icon": "","url": "job/AllJob","parentId": "14",'
+
 	+'"childs": []},{"id": "142","name": "添加职位","icon": "","url": "job/showAddJob.html","parentId": "14",'
-	+'"childs": []}]},{"id": "15","name": "员工管理","icon": "/xingxing.png","url": "employee/employee.html","parentId": "1",'
-	+'"childs": [{"id": "151","name": "员工查询","icon": "","url": "employee/employee.html","parentId": "15",'
-	+'"childs": []},{"id": "152","name": "添加员工","icon": "","url": "employee/showAddEmployee.html","parentId": "15",'
-	+'"childs": []}]},{"id": "16","name": "公告管理","icon": "/xingxing.png","url": "notice/notice.html","parentId": "1",'
-	+'"childs": [{"id": "161","name": "公告查询","icon": "","url": "notice/notice.html","parentId": "16",'
+	+'"childs": []}]},{"id": "15","name": "员工管理","icon": "/xingxing.png","url": "employee/searchEmployees","parentId": "1",'
+	+'"childs": [{"id": "151","name": "员工查询","icon": "","url": "employee/searchEmployees","parentId": "15",'
+	+'"childs": []},{"id": "152","name": "添加员工","icon": "","url": "employee/showAddEmployee","parentId": "15",'
+	+'"childs": []}]},{"id": "16","name": "公告管理","icon": "/xingxing.png","url": "notice/selectAllNotices","parentId": "1",'
+	+'"childs": [{"id": "161","name": "公告查询","icon": "","url": "notice/selectAllNotices","parentId": "16",'
 	+'"childs": []},{"id": "162","name": "添加公告","icon": "","url": "notice/showAddNotice.html","parentId": "16",'
-	+'"childs": []}]},{"id": "17","name": "下载中心","icon": "/xingxing.png","url": "document/document.html","parentId": "1",'
-	+'"childs": [{"id": "171","name": "文档查询","icon": "","url": "document/document.html","parentId": "17",'
+	+'"childs": []}]},{"id": "17","name": "下载中心","icon": "/xingxing.png","url": "document/getAllDocuments","parentId": "1",'
+	+'"childs": [{"id": "171","name": "文档查询","icon": "","url": "document/getAllDocuments","parentId": "17",'
 	+'"childs": []},{"id": "172","name": "上传文档","icon": "","url": "document/showAddDocument.html","parentId": "17","childs": []}]}]}]';
 	// jquery的方法
 	var jsonObj = $.parseJSON(json)

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wrb.csi.model.Employee;
 import com.wrb.csi.model.Job;
 import com.wrb.csi.service.JobService;
 
@@ -18,7 +19,7 @@ import com.wrb.csi.service.JobService;
 public class JobController {
 	@Autowired
 	private JobService jobService;
-
+	
 	@RequestMapping(value = "/job/searchJob", method = { RequestMethod.POST, RequestMethod.GET })
 	public String seacherJob(HttpServletRequest request, HttpSession session) {
 		String jobrname = request.getParameter("jobname");
@@ -35,6 +36,14 @@ public class JobController {
 		}
 		return "job/job";
 	}
+	
+	
+	@RequestMapping(value = "/job/AllJob", method = { RequestMethod.POST, RequestMethod.GET })
+	public String AllEmployee(HttpServletRequest request, HttpSession session) {
+		List<Job> Job = jobService.selectAllJobs();
+		session.setAttribute("datas", Job);
+		return "job/job";
+	}
 
 	@RequestMapping(value = "/job/addJob", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addJob(HttpServletRequest request, HttpSession session) {
@@ -49,7 +58,7 @@ public class JobController {
 
 	@RequestMapping(value = "/job/delJob", method = { RequestMethod.POST, RequestMethod.GET })
 	public String delJob(HttpServletRequest request, HttpSession session) {
-		String[] select = request.getParameterValues("check");
+		String[] select = request.getParameterValues("checkbox");
 		for (int i = 0; i < select.length; i++) {
 			if (select[i].compareTo("on") != 0)
 				jobService.deleteByPrimaryKey(Integer.valueOf(select[i]));

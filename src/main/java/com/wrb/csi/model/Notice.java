@@ -180,4 +180,15 @@ public class Notice implements Serializable {
     public void setUserid(Integer userid) {
         this.userid = userid;
     }
+    
+    private String userName;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+    
 }

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wrb.csi.model.Job;
 import com.wrb.csi.model.User;
 import com.wrb.csi.model.User.SearchUserMessage;
 import com.wrb.csi.service.UserService;
@@ -110,6 +111,14 @@ public class UserController {
 				: (SearchUserMessage) session.getAttribute("message");
 		session.setAttribute("currentPage", page);
 		session.setAttribute("datas", service.seacherUser(message, page, pageSize));
+		return "user/user";
+	}
+	
+	
+	@RequestMapping(value = "/user/AllUser", method = { RequestMethod.POST, RequestMethod.GET })
+	public String AllEmployee(HttpServletRequest request, HttpSession session) {
+		List<User> User = service.selectAllUsers();
+		session.setAttribute("datas", User);
 		return "user/user";
 	}
 
