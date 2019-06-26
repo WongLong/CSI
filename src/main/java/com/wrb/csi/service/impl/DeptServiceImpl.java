@@ -8,34 +8,35 @@ import org.springframework.stereotype.Service;
 
 import com.wrb.csi.dao.DeptDao;
 import com.wrb.csi.model.Dept;
+import com.wrb.csi.model.Job;
 import com.wrb.csi.service.DeptService;
 import com.wrb.csi.service.RedisService;
 
 @Service
 public class DeptServiceImpl implements DeptService {
 	@Autowired
-	private DeptDao deptDao;
+	private DeptDao Dao;
 	@Autowired
 	private RedisService redisService;
 
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
-		String key = "dept_" + id;
+		String key = "job_" + id;
 		redisService.delete(key);
-		redisService.delete("depts");
-		return deptDao.deleteByPrimaryKey(id);
+		redisService.delete("jobs");
+		return Dao.deleteByPrimaryKey(id);
 	}
 
 	@Override
 	public int insert(Dept record) {
-		redisService.delete("depts");
-		return deptDao.insert(record);
+		redisService.delete("jobs");
+		return Dao.insert(record);
 	}
 
 	@Override
 	public int insertSelective(Dept record) {
-		redisService.delete("depts");
-		return deptDao.insertSelective(record);
+		redisService.delete("jobs");
+		return Dao.insertSelective(record);
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class DeptServiceImpl implements DeptService {
 			return dept;
 		}
 
-		Dept dept = deptDao.selectByPrimaryKey(id);
+		Dept dept = Dao.selectByPrimaryKey(id);
 		redisService.set(key, dept);
 		return dept;
 	}
@@ -56,7 +57,7 @@ public class DeptServiceImpl implements DeptService {
 		String key = "dept_" + record.getId();
 		redisService.set(key, record);
 		redisService.delete("depts");
-		return deptDao.updateByPrimaryKeySelective(record);
+		return Dao.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class DeptServiceImpl implements DeptService {
 		String key = "dept_" + record.getId();
 		redisService.set(key, record);
 		redisService.delete("depts");
-		return deptDao.updateByPrimaryKey(record);
+		return Dao.updateByPrimaryKey(record);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -76,25 +77,10 @@ public class DeptServiceImpl implements DeptService {
 			return depts;
 		}
 
-		List<Dept> depts = deptDao.selectAllDepts();
+		List<Dept> depts = Dao.selectAllDepts();
 		redisService.set(key, depts);
 		return depts;
 	}
 
-	@Override
-	public List<Dept> searchDept(String name) {
-		List<Dept> depts = this.selectAllDepts();
-		List<Dept> dept = new ArrayList<Dept>();
-		if (name == "" || name == null) {
-			return depts;
-		} else {
-			for (int i = 0; i < depts.size(); i++) {
-				if (depts.get(i).getName().equals(name)) {
-					dept.add(depts.get(i));
-				}
-			}
-			return dept;
-		}
-	}
 
 }

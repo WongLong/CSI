@@ -1,11 +1,14 @@
 package com.wrb.csi.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wrb.csi.dao.DeptDao;
 import com.wrb.csi.dao.EmployeeDao;
+import com.wrb.csi.dao.JobDao;
 import com.wrb.csi.model.Employee;
 import com.wrb.csi.service.EmployeeService;
 import com.wrb.csi.service.RedisService;
@@ -14,6 +17,10 @@ import com.wrb.csi.service.RedisService;
 public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
+	@Autowired
+	private DeptDao deptDao;
+	@Autowired
+	private JobDao jobDao;
 	@Autowired
 	private RedisService redisService;
 
@@ -74,7 +81,94 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return employees;
 		}
 		List<Employee> employees = employeeDao.selectAllEmployees();
+		for(int i=0;i<employees.size();i++) {
+			employees.get(i).setDeptname(deptDao.selectByPrimaryKey(employees.get(i).getDeptid()).getName());
+			employees.get(i).setJobname(jobDao.selectByPrimaryKey(employees.get(i).getJobid()).getName());
+		}
 		redisService.set(key, employees);
+		return employees;
+	}
+
+	@Override
+	public List<Employee> searchEmployees(String job_id, String name, String cardId, String sex, String phone,
+			String dept_id) {
+		List<Employee> employees=this.selectAllEmployees();
+		List<Employee> result=new ArrayList<Employee>();
+		
+		if(job_id.compareTo("0")!=0) {				
+			for(int i=0;i<employees.size();i++) {
+				if(employees.get(i).getJobid().compareTo(Integer.valueOf(job_id))==0) {
+					result.add(employees.get(i));
+				}
+			}
+		}
+		else {
+			result.addAll(employees);
+		}
+		employees.clear();
+		
+		if(name.compareTo("")!=0 && name!=null) {
+			for(int i=0;i<result.size();i++) {
+				if(result.get(i).getName().compareTo(name)==0) {
+					employees.add(result.get(i));
+				}
+			}
+		}
+		else {
+			employees.addAll(result);
+		}
+		result.clear();
+		
+		
+		if(sex.compareTo("0")!=0) {				
+			for(int i=0;i<employees.size();i++) {
+				if(employees.get(i).getSex().compareTo(Integer.valueOf(sex))==0) {
+					result.add(employees.get(i));
+				}
+			}
+		}
+		else {
+			result.addAll(employees);
+		}
+		employees.clear();
+		
+		if(cardId.compareTo("")!=0 && cardId!=null) {
+			for(int i=0;i<result.size();i++) {
+				if(result.get(i).getCardid().compareTo(cardId)==0) {
+					employees.add(result.get(i));
+				}
+			}
+		}
+		else {
+			employees.addAll(result);
+		}
+		result.clear();
+		
+		
+		if(dept_id.compareTo("0")!=0) {				
+			for(int i=0;i<employees.size();i++) {
+				if(employees.get(i).getDeptid().compareTo(Integer.valueOf(dept_id))==0) {
+					result.add(employees.get(i));
+				}
+			}
+		}
+		else {
+			result.addAll(employees);
+		}
+		employees.clear();
+		
+		if(phone.compareTo("")!=0 && phone!=null) {
+			for(int i=0;i<result.size();i++) {
+				if(result.get(i).getPhone().compareTo(phone)==0) {
+					employees.add(result.get(i));
+				}
+			}
+		}
+		else {
+			employees.addAll(result);
+		}
+		result.clear();
+		
 		return employees;
 	}
 }

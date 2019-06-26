@@ -12,4 +12,5 @@ public interface EmployeeService {
     int updateByPrimaryKeySelective(Employee record);
     int updateByPrimaryKey(Employee record);
     List<Employee> selectAllEmployees();
+    List<Employee> searchEmployees(String job_id,String name,String cardId,String sex,String phone,String dept_id);
 }

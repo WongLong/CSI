@@ -13,5 +13,4 @@ public interface DeptService {
 	int updateByPrimaryKeySelective(Dept record);
 	int updateByPrimaryKey(Dept record);
 	List<Dept> selectAllDepts();
-	List<Dept> searchDept(String name);
 }

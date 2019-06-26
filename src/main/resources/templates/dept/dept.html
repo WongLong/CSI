@@ -66,6 +66,14 @@
 	 	   })
 	    })
 	</script>
+	<script type="text/javascript"
+		src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		function delSubmit()
+		{
+			document.delform.submit();
+		}
+	</script>
 </head>
 <body>
 	<!-- 导航 -->
@@ -92,12 +100,13 @@
 					class="main_tab">
 					<tr>
 						<td class="fftd">
-							<form action="searchDepts" >
+							<form action="searchDept" id="searchDept">
 								<table width="100%" border="0" cellpadding="0" cellspacing="0">
 									<tr>
-										<td class="font3">部门名称：<input type="text" name="searchDeptname"></input>
-											<input type="submit" value="搜索"></input> <input id="delete"
-											type="button" value="删除"></input>
+										<td class="font3">部门名称：<input type="text"
+											name="searchDeptname"></input> <input type="submit"
+											value="搜索"></input> <input id="delete" type="button"
+											value="删除"  onclick="delSubmit()"></input>
 										</td>
 									</tr>
 								</table>
@@ -111,6 +120,7 @@
 		<!-- 数据展示区 -->
 		<tr valign="top">
 			<td height="20">
+			<form action="delDept" id="delform" name="delform" method="post">
 				<table width="100%" border="1" cellpadding="5" cellspacing="0"
 					style="border: #c2c6cc 1px solid; border-collapse: collapse;">
 					<tbody>
@@ -125,19 +135,17 @@
 						<tr id="data_0" align="center" class="main_trbg"
 							style="background-color: rgb(255, 255, 255);"
 							th:each="dept : ${session.datas}">
-							<td><input type="checkbox" id="box_0" value="${dept.id}"></input></td>
+							<td><input type="checkbox" id="check" name="check" th:value="${dept.id}"></input></td>
 							<td th:text="${dept.name}"></td>
 							<td th:text="${dept.remark}"></td>
-							<td align="center" width="40px;"><a
-								href="showUpdateDept.html"> <img title="修改"
-									src="../images/update.gif"></img></a></td>
-
+							<td align="center" width="40px;"><a th:href="@{'/dept/getDept?id='+${dept.id}}"> <img title="修改"
+									src="../images/update.gif"></img></a>
+							</td>
 						</tr>
-
-
 
 					</tbody>
 				</table>
+				</form>
 			</td>
 		</tr>
 		<!-- 分页标签 -->

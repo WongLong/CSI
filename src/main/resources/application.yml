@@ -47,4 +47,3 @@ spring:
 mybatis:
     mapperLocations: classpath:mapper/*.xml
     typeAliasesPackage: com.wrb.csi.model
-        
