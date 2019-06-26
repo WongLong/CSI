@@ -12,7 +12,7 @@ public class Document implements Serializable{
 	public Document() {
 		
 	}
-
+	
 	public Document(String title, String filename, String remark, Date createdate, Integer userid) {
 		super();
 		this.title = title;
@@ -78,7 +78,17 @@ public class Document implements Serializable{
      *
      * @mbggenerated
      */
-    public Integer getId() {
+    private String userName;
+    
+    public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Integer getId() {
         return id;
     }
 

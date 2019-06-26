@@ -18,7 +18,7 @@ function loadMenu(){
 	+'"childs": [{"id": "121","name": "部门查询","icon": "","url": "dept/dept.html","parentId": "12",'
 	+'"childs": []},{"id": "122","name": "添加部门","icon": "","url": "dept/showAddDept.html","parentId": "12",'
 	+'"childs": []}]},{"id": "14","name": "职位管理","icon": "/xingxing.png","url": "job/job.html","parentId": "1",'
-	+'"childs": [{"id": "141","name": "职位查询","icon": "","url": "job/job.html","parentId": "14",'
+	+'"childs": [{"id": "141","name": "职位查询","icon": "","url": "job/getJobs","parentId": "14",'
 	+'"childs": []},{"id": "142","name": "添加职位","icon": "","url": "job/showAddJob.html","parentId": "14",'
 	+'"childs": []}]},{"id": "15","name": "员工管理","icon": "/xingxing.png","url": "employee/employee.html","parentId": "1",'
 	+'"childs": [{"id": "151","name": "员工查询","icon": "","url": "employee/employee.html","parentId": "15",'

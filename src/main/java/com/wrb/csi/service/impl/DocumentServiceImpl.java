@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wrb.csi.dao.DocumentDao;
+import com.wrb.csi.dao.UserDao;
 import com.wrb.csi.model.Document;
 import com.wrb.csi.service.DocumentService;
 import com.wrb.csi.service.RedisService;
@@ -14,6 +15,8 @@ import com.wrb.csi.service.RedisService;
 public class DocumentServiceImpl implements DocumentService {
 	@Autowired
 	private DocumentDao documentDao;
+	@Autowired
+	private UserDao userDao;
 	@Autowired
 	private RedisService redisService;
 
@@ -76,6 +79,10 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 
 		List<Document> documents = documentDao.selectAllDocuments();
+		for(int i=0;i<documents.size();i++)
+		{
+			documents.get(i).setUserName(userDao.selectByPrimaryKey(documents.get(i).getUserid()).getUsername());
+		}
 		redisService.set(key, documents);
 		return documents;
 	}

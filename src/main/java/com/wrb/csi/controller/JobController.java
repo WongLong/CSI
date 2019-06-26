@@ -18,7 +18,7 @@ import com.wrb.csi.service.JobService;
 public class JobController {
 	@Autowired
 	private JobService jobService;
-
+	
 	@RequestMapping(value = "/job/searchJob", method = { RequestMethod.POST, RequestMethod.GET })
 	public String seacherJob(HttpServletRequest request, HttpSession session) {
 		String jobrname = request.getParameter("jobname");
