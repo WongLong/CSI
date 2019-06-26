@@ -37,3 +37,10 @@ $(function(){
 	    		   }
 	    	   })
 	       })
+function empConcel() {
+	var form = document.createElement('form');
+	form.action = 'searchEmployees';
+	form.method = 'post';
+	$(document.body).append(form);
+	form.submit();
+}

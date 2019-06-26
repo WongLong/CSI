@@ -37,6 +37,7 @@ public class UserController {
 			session.setAttribute("datas", service.selectUserOnPage(currentPage, pageSize));
 			return "main";
 		}
+		request.setAttribute("loginError", "用户名或密码错误！");
 		return "loginForm";
 	}
 
@@ -115,13 +116,22 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/user/AllUser", method = { RequestMethod.POST, RequestMethod.GET })
-	public String AllEmployee(HttpServletRequest request, HttpSession session) {
+	public String AllUser(HttpServletRequest request, HttpSession session) {
 		int userSize = service.getUserCount(null);
 		int currentPage = 1;
 		int totalPage = userSize / pageSize + (userSize % pageSize > 0 ? 1 : 0);
 		session.setAttribute("totalPage", totalPage);
 		session.setAttribute("currentPage", currentPage);
 		session.setAttribute("datas", service.selectUserOnPage(currentPage, pageSize));
+		return "user/user";
+	}
+	
+	@RequestMapping(value = "/user/insertUserConcel", method = { RequestMethod.POST, RequestMethod.GET })
+	public String insertUserConcel(HttpServletRequest request, HttpSession session) {
+		SearchUserMessage message = session.getAttribute("message") == null ? new SearchUserMessage()
+				: (SearchUserMessage) session.getAttribute("message");
+		int currentPage = (int) session.getAttribute("currentPage");
+		session.setAttribute("datas", service.seacherUser(message, currentPage, pageSize));
 		return "user/user";
 	}
 

@@ -68,4 +68,11 @@
 	    function down(id){
 	    	$("a[id='down_"+id+"']").trigger("click");
 	    }
+ function documentConcel() {
+		var form = document.createElement('form');
+		form.action = 'searchEmployees';
+		form.method = 'post';
+		$(document.body).append(form);
+		form.submit();
+	}
 	    

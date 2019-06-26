@@ -131,7 +131,7 @@
 									th:value="${notice.id}" name="checked" th:id="'box_'+${notice.id}"></input></td>
 								<td th:text="${notice.title}"></td>
 								<td th:text="${notice.content}"></td>
-								<td th:text="${notice.createdate}"></td>
+								<td th:text="${notice.createdate.toLocaleString()}"></td>
 								<td th:text="${notice.userName}"></td>
 
 								<td align="center" width="40px;"><a

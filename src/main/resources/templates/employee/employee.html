@@ -127,7 +127,7 @@
 					  <td th:text="${employee.cardid}"></td>
 					  <td th:text="${employee.deptname}"></td>
 					  <td th:text="${employee.address}"></td>
-					  <td th:text="${employee.createdate}"></td>
+					  <td th:text="${employee.createdate.toLocaleString()}"></td>
 					  
 					  <td align="center" width="40px;"><a th:href="@{'/employee/getEmployee?id='+${employee.id}}">
 							<img title="修改" src="../images/update.gif"></img></a>

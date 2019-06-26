@@ -37,3 +37,10 @@ $(function(){
 	 		   }
 	 	   })
 	    })
+function deptConcel() {
+	var form = document.createElement('form');
+	form.action = 'AllDept';
+	form.method = 'post';
+	$(document.body).append(form);
+	form.submit();
+}

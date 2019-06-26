@@ -32,8 +32,12 @@ function insertAndUpdateUser() {
 	$("#insertAndUpdateForm").submit();
 }
 
-function cancleInsertUser() {
-	window.location.replace("user");
+function insertUserConcel() {
+	var form = document.createElement('form');
+	form.action = 'insertUserConcel';
+	form.method = 'post';
+	$(document.body).append(form);
+	form.submit();
 }
 
 function lastPage(obj) {

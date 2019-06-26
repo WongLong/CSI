@@ -38,3 +38,10 @@ $(function(){
 		 		   }
 	 	   })
 	    })
+function jobConcel() {
+	var form = document.createElement('form');
+	form.action = 'AllJob';
+	form.method = 'post';
+	$(document.body).append(form);
+	form.submit();
+}

@@ -69,8 +69,6 @@
 	src="js/metronic/plugins/jQuery-Storage-API/jquery.storageapi.js"></script>
 <script src="js/metronic/plugins/app/app.js"></script>
 </head>
-
-
 <body style="width: 100%; height: 100%; margin: 0; padding: 0;">
 	<div class="bg-canvas">
 		<canvas id="demo-canvas" width="100%" height="100%"
@@ -129,8 +127,7 @@
 								class="layui-btn  btn-login" style="width: 150px">&nbsp;&nbsp;刷
 								脸&nbsp;&nbsp;</button>
 						</div>
-
-						<div class="formoperate" id="tishi"
+						<div class="formoperate" id="tishi" th:text="${loginError!=null?loginError:''}"
 							style="text-align: center; color: red; padding-top: 15px">
 						</div>
 					</div>

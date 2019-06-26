@@ -18,9 +18,10 @@
 	<script src="../js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
 	<script src="../js/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
 	<link href="../css/pager.css" type="text/css" rel="stylesheet" />
+	<script src="../js/employee/employee.js" type="text/javascript"></script>
 	<script language="javascript" type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript">
-	    function submit(){
+	    function submitform(){
 	    	/** 员工表单提交 */
 			//$("#employeeForm").submit(function(){
 				var name = $("#name");
@@ -107,7 +108,7 @@
 					$.ligerDialog.error(msg);
 					return false;
 				}
-				$("#employeeForm").submit();
+				document.employeeForm.submit();
 			//});
 	    }
 		
@@ -207,7 +208,8 @@
 			<tr><td class="main_tdbor"></td></tr>
 			
 			<tr><td align="left" class="fftd">
-			<input type="button" onclick="submit()" value="添加"></input>&nbsp;&nbsp;<input type="reset" value="取消 "></input></td></tr>
+			<input type="button" onclick="submitform()" value="添加"></input>&nbsp;&nbsp;
+			<input type="reset" onclick="empConcel()" value="取消 "></input></td></tr>
 		  </tbody></table>
 		  </form>
 		 

@@ -26,11 +26,9 @@
 
 			if ($.trim(title).length <= 2) {
 				alert("请输入两个字符以上的标题");
-				return;
+				return false;
 			}
-
-			//$("#documentForm").submit();
-
+			document.documentForm.submit();
 		})
 	});
 	//]]>
@@ -56,7 +54,7 @@
 		<tr valign="top">
 			<td>
 				<!-- 隐藏表单，flag表示添加标记 -->
-				<form action="changeDocument" id="changeDocument" method="post">
+				<form action="changeDocument" id="documentForm" name="documentForm" method="post">
 					<input type="hidden" name="id" th:value="${session.document.id}"></input>
 					<table width="100%" border="0" cellpadding="0" cellspacing="10"
 						class="main_tab">
@@ -93,8 +91,9 @@
 
 
 						<tr>
-							<td class="font3 fftd"><input type="submit" id="submit"
-								value="确定"></input> <input type="reset" value="重置"></input></td>
+							<td class="font3 fftd">
+							<input type="button" id="btn" value="确定"></input> 
+							<input type="reset" value="重置"></input></td>
 						</tr>
 						<tr>
 							<td class="main_tdbor"></td>

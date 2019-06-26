@@ -31,3 +31,10 @@ $(function(){
 	 		   }
 	 	   })
 	    })
+function noticeConcel() {
+	var form = document.createElement('form');
+	form.action = 'selectAllNotices';
+	form.method = 'post';
+	$(document.body).append(form);
+	form.submit();
+}
