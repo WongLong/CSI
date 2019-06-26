@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.wrb.csi.dao.NoticeDao;
 import com.wrb.csi.dao.UserDao;
 import com.wrb.csi.model.Notice;
-import com.wrb.csi.model.User;
 import com.wrb.csi.service.NoticeService;
 import com.wrb.csi.service.RedisService;
 

@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wrb.csi.model.Document;
-import com.wrb.csi.model.Job;
 import com.wrb.csi.model.User;
 import com.wrb.csi.service.DocumentService;
-import com.wrb.csi.service.UserService;
 
 @Controller
 public class DocumentController {

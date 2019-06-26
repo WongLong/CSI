@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.wrb.csi.model.Job;
 import com.wrb.csi.model.User;
 import com.wrb.csi.model.User.SearchUserMessage;
 import com.wrb.csi.service.UserService;
@@ -117,8 +116,12 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/AllUser", method = { RequestMethod.POST, RequestMethod.GET })
 	public String AllEmployee(HttpServletRequest request, HttpSession session) {
-		List<User> User = service.selectAllUsers();
-		session.setAttribute("datas", User);
+		int userSize = service.getUserCount(null);
+		int currentPage = 1;
+		int totalPage = userSize / pageSize + (userSize % pageSize > 0 ? 1 : 0);
+		session.setAttribute("totalPage", totalPage);
+		session.setAttribute("currentPage", currentPage);
+		session.setAttribute("datas", service.selectUserOnPage(currentPage, pageSize));
 		return "user/user";
 	}
 
