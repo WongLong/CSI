@@ -68,19 +68,21 @@
 		  	<tr valign="top">
 			    <td>
 			   
-				  <!-- 隐藏表单，flag表示添加标记 -->
-    	 			<input type="hidden" name="flag" value="2"></input>
-    	 			<input type="hidden" name="id" value="${notice.id }"></input>
+				 <form action="updateNotice" method="post" >
+    	 			
+    	 		  <input type="hidden" name="id" th:value="${session.temp.id}"></input>
 				  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 					    <tr><td class="font3 fftd">
-					                公告标题：<input type="text" name="title" size="30" id="title" value="参加会议通知"></input>
+					                公告标题：<input type="text" name="title" size="30" id="title" th:value="${session.temp.title}"></input>
 					    	  <span style="color: #ff0000;"></span>
 					    	</td>
 					    </tr>
 						<tr><td class="main_tdbor"></td></tr>
 						
 						<tr><td class="font3 fftd">公告内容：<br/>
-							<textarea name="content" cols="88" rows="11" id="content" >今天有技术部有会议</textarea>
+							<textarea name="content" cols="88" rows="11" id="content" th:text="${session.temp.content}" >
+								
+							</textarea>
 						</td></tr>
 						<tr><td class="main_tdbor"></td></tr>
 						
@@ -89,9 +91,8 @@
 								<input type="reset" value="重置"></input>
 						</td></tr>
 						<tr><td class="main_tdbor"></td></tr>
-					
 				  </table>
-				  
+				  </form>
 				</td>
 		  	</tr>
 		</table>

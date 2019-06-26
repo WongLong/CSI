@@ -1,17 +1,22 @@
 package com.wrb.csi.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wrb.csi.dao.NoticeDao;
+import com.wrb.csi.dao.UserDao;
 import com.wrb.csi.model.Notice;
+import com.wrb.csi.model.User;
 import com.wrb.csi.service.NoticeService;
 import com.wrb.csi.service.RedisService;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
+	@Autowired
+	private UserDao userDao;
 	@Autowired
 	private NoticeDao noticeDao;
 	@Autowired
@@ -76,7 +81,39 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 
 		List<Notice> notices = noticeDao.selectAllNotices();
+		for(int i=0;i<notices.size();i++) {
+			notices.get(i).setUserName(userDao.selectByPrimaryKey(notices.get(i).getUserid()).getUsername());
+		}
 		redisService.set(key, notices);
+		return notices;
+	}
+
+	@Override
+	public List<Notice> searchNotices(String title, String content) {
+		List<Notice> notices = (List<Notice>) this.selectAllNotices();
+		List<Notice> result = new ArrayList<Notice>();
+		if (title != null && title.compareTo("") != 0) {
+			for (int i = 0; i < notices.size(); i++) {
+				if (notices.get(i).getTitle().compareTo(title) == 0) {
+					result.add(notices.get(i));
+				}
+			}
+		}
+		else {
+			result.addAll(notices);
+		}
+		notices.clear();
+		if (content!=null && content.compareTo("")!=0) {
+			for (int i = 0; i < result.size(); i++) {
+				if (result.get(i).getContent().compareTo(content)==0) {
+					notices.add(result.get(i));
+				}
+			}
+			
+		}
+		else {
+			notices.addAll(result);
+		}
 		return notices;
 	}
 }
