@@ -89,6 +89,7 @@ $(function() {
 					input.name = 'ids';
 					input.value = ids.get();
 					form.appendChild(input);
+					$(document.body).append(form);
 					form.submit();
 				}
 			});
