@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.wrb.csi.model.Notice;
 import com.wrb.csi.model.User;
 import com.wrb.csi.service.NoticeService;
+import com.wrb.csi.service.UserService;
 
 
 
@@ -24,6 +25,8 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService service;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="/notice/selectAllNotices",method = {RequestMethod.POST, RequestMethod.GET})
 	public String selectAllNotices(HttpServletRequest request, HttpSession session) {
@@ -66,6 +69,8 @@ public class NoticeController {
 	public String previewNotice(HttpServletRequest request, HttpSession session) {
 		String id=request.getParameter("id");
 		Notice notice=service.selectByPrimaryKey(Integer.valueOf(id));
+		User user=userService.selectByPrimaryKey(notice.getUserid());
+		notice.setUserName(user.getUsername());
 		session.setAttribute("temp", notice);
 		return "notice/previewNotice";
 	}

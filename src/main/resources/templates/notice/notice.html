@@ -139,7 +139,7 @@
 										title="修改" src="../images/update.gif"></img></a></td>
 <!-- @{'/notice/previewNotice?id='+${notice.id}} -->
 								<td align="center" width="40px;" >
-								<a href="" id="prev_19">
+								<a th:href="@{'/notice/previewNotice?id='+${notice.id}}" id="prev_19">
 										<img title="预览" src="../images/prev.gif"></img>
 								</a></td>
 							</tr>
