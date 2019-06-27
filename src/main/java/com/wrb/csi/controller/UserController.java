@@ -114,8 +114,7 @@ public class UserController {
 		session.setAttribute("datas", service.seacherUser(message, page, pageSize));
 		return "user/user";
 	}
-	
-	
+
 	@RequestMapping(value = "/user/AllUser", method = { RequestMethod.POST, RequestMethod.GET })
 	public String AllUser(HttpServletRequest request, HttpSession session) {
 		int userSize = service.getUserCount(null);
@@ -126,7 +125,7 @@ public class UserController {
 		session.setAttribute("datas", service.selectUserOnPage(currentPage, pageSize));
 		return "user/user";
 	}
-	
+
 	@RequestMapping(value = "/user/insertUserConcel", method = { RequestMethod.POST, RequestMethod.GET })
 	public String insertUserConcel(HttpServletRequest request, HttpSession session) {
 		SearchUserMessage message = session.getAttribute("message") == null ? new SearchUserMessage()
@@ -168,7 +167,9 @@ public class UserController {
 		if (loginedUser.getStatus() == 1) {
 			String[] ids = request.getParameter("ids").trim().split(",");
 			for (String id : ids) {
-				service.deleteByPrimaryKey(Integer.parseInt(id));
+				if (loginedUser.getId() != Integer.parseInt(id)) {
+					service.deleteByPrimaryKey(Integer.parseInt(id));
+				}
 			}
 		}
 		int userSize = service.getUserCount(null);
