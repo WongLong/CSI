@@ -32,6 +32,7 @@ public class UserController {
 			int userSize = service.getUserCount(null);
 			int currentPage = 1;
 			int totalPage = userSize / pageSize + (userSize % pageSize > 0 ? 1 : 0);
+			session.removeAttribute("message");
 			session.setAttribute("totalPage", totalPage);
 			session.setAttribute("currentPage", currentPage);
 			session.setAttribute("datas", service.selectUserOnPage(currentPage, pageSize));
